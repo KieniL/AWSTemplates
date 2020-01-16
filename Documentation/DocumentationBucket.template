@@ -1,0 +1,426 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Metadata": {
+        "AWS::CloudFormation::Designer": {
+            "45960543-2187-496b-bdde-dcd98961c51a": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 570,
+                    "y": 240
+                },
+                "z": 1,
+                "embeds": [],
+                "dependson": [
+                    "6ad075c3-2268-455b-9863-c722e8939ee4"
+                ]
+            },
+            "be350cde-ce85-4b05-841f-40c7ac325500": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 450,
+                    "y": 180
+                },
+                "z": 1,
+                "embeds": []
+            },
+            "6ad075c3-2268-455b-9863-c722e8939ee4": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 570,
+                    "y": 90
+                },
+                "z": 1,
+                "embeds": [],
+                "dependson": [
+                    "be350cde-ce85-4b05-841f-40c7ac325500"
+                ]
+            },
+            "b4a3658a-4ad6-4fd1-9494-c6043c449909": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 450,
+                    "y": 280
+                },
+                "z": 1,
+                "embeds": []
+            },
+            "02e6234f-10e5-46fa-a78f-f8fa230f9c4e": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 570,
+                    "y": 320
+                },
+                "z": 1,
+                "embeds": [],
+                "isassociatedwith": [
+                    "45960543-2187-496b-bdde-dcd98961c51a"
+                ]
+            }
+        }
+    },
+    "Parameters": {
+        "IPRanges": {
+            "Description": "Comma-delimited list of CIDR which are allowed to access the bucket",
+            "Type": "CommaDelimitedList",
+            "Default": "10.200.1.0/24,10.200.2.0/24,10.200.3.0/24"
+        },
+        "ConfluenceKey": {
+            "Type": "String",
+            "Default": "inpr",
+            "Description": "Enter the name of the confluence key where to create.",
+            "AllowedPattern": ".+"
+        },
+        "Secretname": {
+            "Type": "String",
+            "Default": "nctest",
+            "Description": "Enter the name of the confluence secret to search for the credentials (username, pw, url) .",
+            "AllowedPattern": ".+"
+        },
+        "ParentPage": {
+            "Type": "String",
+            "Default": "49905666",
+            "Description": "Enter the id of the confluence page under which the function should create pages.",
+            "AllowedPattern": ".+"
+        }
+    },
+    "Resources": {
+        "S3Bucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+                "BucketName": {
+                    "Fn::Join": [
+                        "-",
+                        [
+                            {
+                                "Ref": "AWS::StackName"
+                            },
+                            "bucket"
+                        ]
+                    ]
+                },
+                "BucketEncryption": {
+                    "ServerSideEncryptionConfiguration": [
+                        {
+                            "ServerSideEncryptionByDefault": {
+                                "SSEAlgorithm": "AES256"
+                            }
+                        }
+                    ]
+                },
+                "AccessControl": "PublicReadWrite",
+                "LifecycleConfiguration": {
+                    "Rules": [
+                        {
+                            "Id": "DeleteContentAfter1Day",
+                            "Prefix": "docu_",
+                            "Status": "Enabled",
+                            "ExpirationInDays": 1
+                        }
+                    ]
+                },
+                "WebsiteConfiguration": {
+                    "IndexDocument": "index.html",
+                    "ErrorDocument": "error.html"
+                },
+                "CorsConfiguration": {
+                    "CorsRules": [
+                        {
+                            "AllowedHeaders": [
+                                "*"
+                            ],
+                            "AllowedMethods": [
+                                "GET"
+                            ],
+                            "AllowedOrigins": [
+                                "*"
+                            ],
+                            "ExposedHeaders": [
+                                "Date"
+                            ],
+                            "Id": "myCORSRuleId1",
+                            "MaxAge": "3600"
+                        },
+                        {
+                            "AllowedHeaders": [
+                                "*"
+                            ],
+                            "AllowedMethods": [
+                                "PUT"
+                            ],
+                            "AllowedOrigins": [
+                                "*"
+                            ],
+                            "ExposedHeaders": [
+                                "Connection",
+                                "Server",
+                                "Date"
+                            ],
+                            "Id": "myCORSRuleId2",
+                            "MaxAge": "1800"
+                        }
+                    ]
+                },
+                "NotificationConfiguration": {
+                    "LambdaConfigurations": [
+                        {
+                            "Event": "s3:ObjectCreated:Put",
+                            "Filter": {
+                                "S3Key": {
+                                    "Rules": [
+                                        {
+                                            "Name": "suffix",
+                                            "Value": ".groovy"
+                                        },
+                                        {
+                                            "Name": "prefix",
+                                            "Value": "docu_"
+                                        }
+                                    ]
+                                }
+                            },
+                            "Function": {
+                                "Fn::GetAtt": [
+                                    "DocuFunction",
+                                    "Arn"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "45960543-2187-496b-bdde-dcd98961c51a"
+                }
+            },
+            "DependsOn": [
+                "DocuInvokePermission"
+            ]
+        },
+        "ReadPolicy": {
+            "Type": "AWS::S3::BucketPolicy",
+            "Properties": {
+                "Bucket": {
+                    "Ref": "S3Bucket"
+                },
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": "*",
+                            "Action": [
+                                "s3:PutObject",
+                                "s3:GetObject"
+                            ],
+                            "Resource": {
+                                "Fn::Sub": "arn:aws:s3:::${S3Bucket}/*"
+                            },
+                            "Condition": {
+                                "IpAddress": {
+                                    "aws:SourceIp": {
+                                        "Ref": "IPRanges"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "AWS": {
+                                    "Fn::GetAtt": [
+                                        "LambdaS3Role",
+                                        "Arn"
+                                    ]
+                                }
+                            },
+                            "Action": [
+                                "s3:GetObject"
+                            ],
+                            "Resource": {
+                                "Fn::Sub": "arn:aws:s3:::${S3Bucket}/*"
+                            }
+                        }
+                    ]
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "02e6234f-10e5-46fa-a78f-f8fa230f9c4e"
+                }
+            }
+        },
+        "DocuFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "FunctionName": {
+                    "Fn::Join": [
+                        "-",
+                        [
+                            {
+                                "Ref": "AWS::StackName"
+                            },
+                            "function"
+                        ]
+                    ]
+                },
+                "Handler": "lambda_function.lambda_handler",
+                "Code": {
+                    "S3Bucket": "cf-kienibucket",
+                    "S3Key": "docu-function.zip"
+                },
+                "Runtime": "python3.8",
+                "Timeout": 3,
+                "MemorySize": 128,
+                "Environment": {
+                    "Variables": {
+                        "secretname": {
+                            "Ref": "Secretname"
+                        },
+                        "confluencekey": {
+                            "Ref": "ConfluenceKey"
+                        },
+                        "region": {
+                            "Ref": "AWS::Region"
+                        },
+                        "parentpage": {
+                            "Ref": "ParentPage"
+                        }
+                    }
+                },
+                "Role": {
+                    "Fn::GetAtt": [
+                        "LambdaS3Role",
+                        "Arn"
+                    ]
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "be350cde-ce85-4b05-841f-40c7ac325500"
+                }
+            }
+        },
+        "DocuInvokePermission": {
+            "Type": "AWS::Lambda::Permission",
+            "DependsOn": "DocuFunction",
+            "Properties": {
+                "FunctionName": {
+                    "Fn::GetAtt": [
+                        "DocuFunction",
+                        "Arn"
+                    ]
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "s3.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "arn:aws:s3:::",
+                            {
+                                "Fn::Join": [
+                                    "-",
+                                    [
+                                        {
+                                            "Ref": "AWS::StackName"
+                                        },
+                                        "bucket"
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "6ad075c3-2268-455b-9863-c722e8939ee4"
+                }
+            }
+        },
+        "LambdaS3Role": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "RoleName": {
+                    "Fn::Join": [
+                        "-",
+                        [
+                            {
+                                "Ref": "AWS::StackName"
+                            },
+                            "role"
+                        ]
+                    ]
+                },
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "lambda.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Policies": [
+                    {
+                        "PolicyName": "writetoLog",
+                        "PolicyDocument": {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Effect": "Allow",
+                                    "Action": [
+                                        "logs:CreateLogGroup",
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents",
+                                        "secretsmanager:GetSecretValue",
+                                        "kms:Decrypt"
+                                    ],
+                                    "Resource": "*"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "b4a3658a-4ad6-4fd1-9494-c6043c449909"
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "WebsiteURL": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "S3Bucket",
+                    "WebsiteURL"
+                ]
+            },
+            "Description": "URL for website hosted on S3"
+        }
+    }
+}
