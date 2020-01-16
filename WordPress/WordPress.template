@@ -15,8 +15,7 @@
                 "embeds": [
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c739e67a-cf89-40a8-a07c-abb79b652c6b",
-                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
-                    "cf37a90d-82e7-4fc4-b965-e9f056f0efb8"
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2"
                 ]
             },
             "97c27e3a-f4de-4265-9c3c-74b2c42b79f2": {
@@ -123,6 +122,7 @@
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4"
                 ]
             },
@@ -139,6 +139,7 @@
                 "parent": "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                 "embeds": [],
                 "iscontainedinside": [
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
@@ -329,6 +330,7 @@
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4"
                 ]
             },
@@ -347,6 +349,7 @@
                     "d3e4ba0e-c8fc-4e3e-a364-52080418b68e"
                 ],
                 "iscontainedinside": [
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
@@ -531,6 +534,7 @@
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
+                    "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6"
                 ],
                 "dependson": [
@@ -593,19 +597,6 @@
                 "isassociatedwith": [
                     "9c151793-cafc-4ba4-af06-436afa93def6"
                 ]
-            },
-            "cf37a90d-82e7-4fc4-b965-e9f056f0efb8": {
-                "size": {
-                    "width": 60,
-                    "height": 60
-                },
-                "position": {
-                    "x": 370,
-                    "y": -240
-                },
-                "z": 2,
-                "parent": "766180e3-b0d5-422d-8406-6afb79f6e9f4",
-                "embeds": []
             }
         }
     },
@@ -649,7 +640,6 @@
             "Properties": {
                 "CidrBlock": "10.0.1.0/24",
                 "MapPublicIpOnLaunch": true,
-                "AvailabilityZone": "eu-central-1a",
                 "VpcId": {
                     "Ref": "VPC"
                 }
@@ -869,25 +859,6 @@
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
                     "id": "c158047e-65c5-49e4-8398-6ff4981b7fc7"
-                }
-            }
-        },
-        "DockerVolume": {
-            "Type": "AWS::EC2::Volume",
-            "Properties": {
-                "AvailabilityZone": {
-                    "Fn::GetAtt": [
-                        "DockerServer",
-                        "AvailabilityZone"
-                    ]
-                },
-                "Encrypted": "true",
-                "VolumeType": "st1",
-                "Size" : 500
-            },
-            "Metadata": {
-                "AWS::CloudFormation::Designer": {
-                    "id": "cf37a90d-82e7-4fc4-b965-e9f056f0efb8"
                 }
             }
         }
