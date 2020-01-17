@@ -556,9 +556,9 @@
                 "t3.xlarge",
                 "t3a.xlarge",
                 "t3.2xlarge",
-                "t3.2xlarge"
+                "t3a.2xlarge"
             ],
-            "Description": "Enter t2.micro, g2.nano, t2.small. Default is t2.micro."
+            "Description": "Enter t3.large, t3a.large, t3.xlarge, t3a.xlarge, t3a.xlarge, t3.2xlarge, t3a.2xlarge. Default is t2.micro."
         },
         "IPLocation": {
             "Description": " The IP address range that can be used to Connect via Port 80 to the EC2 instances",
