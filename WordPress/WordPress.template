@@ -670,7 +670,7 @@
                                 "sudo systemctl start docker && sudo systemctl enable docker",
 								"sudo mkdir /wp /mysql",
                                 "sudo docker run -d -p 8080:80 -v /wp:/var/www/html --name wpkieni wordpress",
-                                "sudo docker run -d -p 3306:3306 -v /mysql:/var/lib/mysql --env MYSQL_DATABASE=mysql --env MYSQL_USER=kieni --env MYSQL_PASSWORD=kieni --env MYSQL_RANDOM_ROOT_PASSWORD=1 --name wpmysql mysql:5.7",
+                                "sudo docker run -d -v /mysql:/var/lib/mysql --env MYSQL_DATABASE=mysql --env MYSQL_USER=kieni --env MYSQL_PASSWORD=kieni --env MYSQL_RANDOM_ROOT_PASSWORD=1 --name wpmysql mysql:5.7",
                                 ""
                             ]
                         ]
