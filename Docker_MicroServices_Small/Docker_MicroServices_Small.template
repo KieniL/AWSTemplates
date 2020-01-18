@@ -630,7 +630,7 @@
                                 "#!/bin/sh",
                                 "sudo apt-get update && sudo apt-get install -y docker.io",
                                 "sudo systemctl start docker && sudo systemctl enable docker",
-								"sudo docker network create --subnet=172.18.0.0/16 microservice",
+								"sudo docker network create --subnet=172.18.0.0/24 microservice",
 								"sudo docker run -d -p 8761:8761 --net microservice --ip 172.18.0.2 --name eureka springcloud/eureka",
                                 ""
                             ]
