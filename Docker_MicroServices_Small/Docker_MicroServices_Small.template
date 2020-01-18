@@ -563,15 +563,13 @@
     "Parameters": {
         "InstanceTypeParameter": {
             "Type": "String",
-            "Default": "t2.micro",
+            "Default": "t3a.small",
             "AllowedValues": [
-                "t3a.nano",
-                "t2.micro",
-                "t3a.micro",
                 "t3a.small",
-                "t3a.medium"
+                "t3a.medium",
+				"t3a.large"
             ],
-            "Description": "Enter Instance type. Default is t2.micro."
+            "Description": "Enter Instance type. Default is t3a.small."
         },
         "IPLocation": {
             "Description": " The IP address range that can be used to Connect via Port 80 to the EC2 instances",
