@@ -124,6 +124,8 @@
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4"
                 ]
             },
@@ -140,6 +142,8 @@
                 "parent": "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                 "embeds": [],
                 "iscontainedinside": [
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
@@ -334,6 +338,8 @@
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4"
                 ]
             },
@@ -352,6 +358,8 @@
                     "d3e4ba0e-c8fc-4e3e-a364-52080418b68e"
                 ],
                 "iscontainedinside": [
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
@@ -540,6 +548,8 @@
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
+                    "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
+                    "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6"
                 ],
                 "dependson": [
@@ -602,18 +612,6 @@
                 "isassociatedwith": [
                     "9c151793-cafc-4ba4-af06-436afa93def6"
                 ]
-            },
-            "8967fb2f-2eb7-4c83-a5ce-1f35f5eb2b0f": {
-                "size": {
-                    "width": 60,
-                    "height": 60
-                },
-                "position": {
-                    "x": 80,
-                    "y": -240
-                },
-                "z": 0,
-                "embeds": []
             }
         }
     },
@@ -859,12 +857,24 @@
                             "Version": "2012-10-17",
                             "Statement": [
                                 {
-                                    "Effect": "Allow",
                                     "Action": [
+                                        "logs:CreateLogStream",
+                                        "logs:DescribeLogStreams",
                                         "logs:PutLogEvents"
                                     ],
+                                    "Effect": "Allow",
                                     "Resource": {
-                                        "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:${LogGroupName}:log-stream:${SSMLogStream}"
+                                        "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:ssmlog:*"
+                                    }
+                                },
+                                {
+                                    "Action": [
+                                        "logs:CreateLogGroup",
+                                        "logs:DescribeLogGroups"
+                                    ],
+                                    "Effect": "Allow",
+                                    "Resource": {
+                                        "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:*"
                                     }
                                 }
                             ]
@@ -901,30 +911,6 @@
             "Metadata": {
                 "AWS::CloudFormation::Designer": {
                     "id": "c158047e-65c5-49e4-8398-6ff4981b7fc7"
-                }
-            }
-        },
-        "SSMLogStream": {
-            "Type": "AWS::Logs::LogStream",
-            "Properties": {
-                "LogGroupName": {
-                    "Ref": "LogGroupName"
-                },
-                "LogStreamName": {
-                    "Fn::Join": [
-                        "-",
-                        [
-                            {
-                                "Ref": "AWS::StackName"
-                            },
-                            "logstream"
-                        ]
-                    ]
-                }
-            },
-            "Metadata": {
-                "AWS::CloudFormation::Designer": {
-                    "id": "8967fb2f-2eb7-4c83-a5ce-1f35f5eb2b0f"
                 }
             }
         }
