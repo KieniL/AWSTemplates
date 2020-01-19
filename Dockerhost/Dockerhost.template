@@ -598,7 +598,7 @@
             "ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x."
         },
         "LogGroupName": {
-            "Description": "The Name of the CloudWatch LogGroup to log sessions into",
+            "Description": "The Name of the CloudWatch LogGroup to log sessions into. The same Group should be as preffered loggroup in sessionsmanager.",
             "Type": "String",
             "Default": "ssmlog",
             "AllowedPattern": ".+"
