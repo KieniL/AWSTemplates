@@ -126,6 +126,8 @@
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4"
                 ]
             },
@@ -142,6 +144,8 @@
                 "parent": "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                 "embeds": [],
                 "iscontainedinside": [
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
@@ -340,6 +344,8 @@
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4"
                 ]
             },
@@ -358,6 +364,8 @@
                     "d3e4ba0e-c8fc-4e3e-a364-52080418b68e"
                 ],
                 "iscontainedinside": [
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
@@ -550,6 +558,8 @@
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
+                    "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
+                    "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6"
                 ],
                 "dependson": [
@@ -640,6 +650,11 @@
             "Type": "String",
             "Default": "ssmlog",
             "AllowedPattern": ".+"
+        },
+        "Zone": {
+            "Description": "Fill in AZ where to deploy Subnet and Instance",
+            "Type": "AWS::EC2::AvailabilityZone::Name",
+            "AllowedPattern": ".+"
         }
     },
     "Resources": {
@@ -661,6 +676,9 @@
             "Properties": {
                 "CidrBlock": "10.0.1.0/24",
                 "MapPublicIpOnLaunch": true,
+                "AvailabilityZone": {
+                    "Ref": "Zone"
+                },
                 "VpcId": {
                     "Ref": "VPC"
                 }
@@ -674,6 +692,9 @@
         "DockerServer": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "Zone"
+                },
                 "ImageId": "ami-0cc0a36f626a4fdf5",
                 "InstanceType": {
                     "Ref": "InstanceTypeParameter"

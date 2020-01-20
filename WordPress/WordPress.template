@@ -625,6 +625,11 @@
             "Type": "String",
             "Default": "ssmlog",
             "AllowedPattern": ".+"
+        },
+        "Zone": {
+            "Description": "Fill in AZ where to deploy Subnet and Instance",
+            "Type": "AWS::EC2::AvailabilityZone::Name",
+            "AllowedPattern": ".+"
         }
     },
     "Resources": {
@@ -646,6 +651,9 @@
             "Properties": {
                 "CidrBlock": "10.0.1.0/24",
                 "MapPublicIpOnLaunch": true,
+				"AvailabilityZone": {
+                    "Ref": "Zone"
+                },
                 "VpcId": {
                     "Ref": "VPC"
                 }
@@ -659,6 +667,9 @@
         "DockerServer": {
             "Type": "AWS::EC2::Instance",
             "Properties": {
+			    "AvailabilityZone": {
+                    "Ref": "Zone"
+                },
                 "ImageId": "ami-0cc0a36f626a4fdf5",
                 "InstanceType": {
                     "Ref": "InstanceTypeParameter"
