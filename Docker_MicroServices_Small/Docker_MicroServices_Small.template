@@ -630,6 +630,8 @@
             "Type": "String",
             "Default": "t3a.small",
             "AllowedValues": [
+				"t3a.nano",
+				"t3a.micro",
                 "t3a.small",
                 "t3a.medium",
                 "t3a.large"
