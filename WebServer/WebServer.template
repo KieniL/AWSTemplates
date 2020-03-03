@@ -4,8 +4,8 @@
         "AWS::CloudFormation::Designer": {
             "766180e3-b0d5-422d-8406-6afb79f6e9f4": {
                 "size": {
-                    "width": 450,
-                    "height": 370
+                    "width": 420,
+                    "height": 310
                 },
                 "position": {
                     "x": 480,
@@ -33,6 +33,7 @@
                     "77fda4e5-5738-4d38-8fe9-6335b77b7887"
                 ],
                 "iscontainedinside": [
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
@@ -337,6 +338,7 @@
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2"
                 ],
                 "dependson": [
@@ -350,12 +352,13 @@
                 },
                 "position": {
                     "x": 540,
-                    "y": -160
+                    "y": -220
                 },
                 "z": 2,
                 "parent": "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                 "embeds": [],
                 "iscontainedinside": [
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
@@ -510,7 +513,7 @@
                     "height": 150
                 },
                 "position": {
-                    "x": 750,
+                    "x": 710,
                     "y": -410
                 },
                 "z": 2,
@@ -519,6 +522,7 @@
                     "d3e4ba0e-c8fc-4e3e-a364-52080418b68e"
                 ],
                 "iscontainedinside": [
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
@@ -671,13 +675,14 @@
                     "height": 60
                 },
                 "position": {
-                    "x": 790,
+                    "x": 750,
                     "y": -370
                 },
                 "z": 3,
                 "parent": "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                 "embeds": [],
                 "iscontainedinside": [
+                    "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
@@ -832,7 +837,7 @@
                     "height": 60
                 },
                 "position": {
-                    "x": 1210,
+                    "x": 980,
                     "y": -310
                 },
                 "z": 0,
@@ -862,7 +867,7 @@
                     "height": 60
                 },
                 "position": {
-                    "x": 250,
+                    "x": 280,
                     "y": -380
                 },
                 "z": 0,
@@ -874,7 +879,7 @@
                     "height": 60
                 },
                 "position": {
-                    "x": 370,
+                    "x": 380,
                     "y": -380
                 },
                 "z": 0,
@@ -890,7 +895,7 @@
                 },
                 "position": {
                     "x": 370,
-                    "y": -210
+                    "y": -220
                 },
                 "z": 0,
                 "embeds": []
@@ -901,8 +906,8 @@
                     "height": 60
                 },
                 "position": {
-                    "x": 250,
-                    "y": -210
+                    "x": 280,
+                    "y": -220
                 },
                 "z": 0,
                 "embeds": [],
@@ -941,7 +946,7 @@
             ],
             "ParameterLabels": {
                 "InstanceTypeParameter": {
-                    "default": "Enter t2.micro, t2.nano, t2.small. Default is t2.micro."
+                    "default": "Enter Instancetype. Default is t2.micro."
                 },
                 "IPLocation": {
                     "default": " The IP address range that can be used to Connect via Port 80 to the EC2 instances."
