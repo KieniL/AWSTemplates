@@ -1173,7 +1173,36 @@
                         "CidrIp": {
                             "Ref": "IPLocation"
                         }
+                    },
+					{
+                        "IpProtocol": "tcp",
+                        "FromPort": "80",
+                        "ToPort": "80",
+                        "CidrIp": {
+                            "Ref": "IPLocation"
+                        }
+                    },
+					{
+                        "IpProtocol": "tcp",
+                        "FromPort": "8080",
+                        "ToPort": "8080",
+                        "CidrIp": {
+                            "Ref": "IPLocation"
+                        }
+                    },
+					{
+                        "IpProtocol": "tcp",
+                        "FromPort": "5432",
+                        "ToPort": "5432",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+					{
+                        "IpProtocol": "tcp",
+                        "FromPort": "2049",
+                        "ToPort": "2049",
+                        "CidrIp": "0.0.0.0/0"
                     }
+					
                 ],
                 "VpcId": {
                     "Ref": "VPC"
@@ -1370,7 +1399,9 @@
                     "Ref": "Zone"
                 },
                 "ImageId": "ami-0cc0a36f626a4fdf5",
-                "InstanceType": "t2.micro",
+                "InstanceType": {
+                    "Ref": "InstanceTypeParameter"
+                },
                 "KeyName": {
                     "Ref": "KeyPair"
                 },
