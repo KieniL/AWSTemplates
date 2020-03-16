@@ -2063,7 +2063,9 @@
                     "Ref": "Zone"
                 },
                 "ImageId": "ami-0cc0a36f626a4fdf5",
-                "InstanceType": "t2.micro",
+                "InstanceType": {
+                    "Ref": "InstanceTypeParameter"
+                },
                 "KeyName": {
                     "Ref": "KeyPair"
                 },
