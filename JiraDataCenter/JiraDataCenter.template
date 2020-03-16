@@ -24,8 +24,8 @@
             },
             "97c27e3a-f4de-4265-9c3c-74b2c42b79f2": {
                 "size": {
-                    "width": 130,
-                    "height": 470
+                    "width": 180,
+                    "height": 560
                 },
                 "position": {
                     "x": 810,
@@ -34,6 +34,7 @@
                 "z": 2,
                 "parent": "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                 "embeds": [
+                    "eff9d598-2677-4529-970a-f9c418601b0f",
                     "3c0237c8-8ea5-4395-86cd-27cd47908c42",
                     "6d911319-acaa-4933-8694-f766c4043758",
                     "8df1a60b-7c55-4bd2-a56c-2e1cfb6327cc",
@@ -41,6 +42,9 @@
                     "77fda4e5-5738-4d38-8fe9-6335b77b7887"
                 ],
                 "iscontainedinside": [
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
@@ -175,6 +179,9 @@
                 "parent": "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                 "embeds": [],
                 "iscontainedinside": [
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
@@ -423,6 +430,9 @@
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4"
                 ]
             },
@@ -555,6 +565,9 @@
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4"
                 ]
             },
@@ -571,6 +584,9 @@
                 "parent": "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                 "embeds": [],
                 "iscontainedinside": [
+                    "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
+                    "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
+                    "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
                     "c43a34bc-775e-47da-a3b1-0046ce47ebe6",
@@ -846,6 +862,9 @@
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2"
                 ],
                 "dependson": [
@@ -859,12 +878,15 @@
                 },
                 "position": {
                     "x": 840,
-                    "y": -300
+                    "y": -240
                 },
                 "z": 3,
                 "parent": "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                 "embeds": [],
                 "iscontainedinside": [
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
@@ -991,12 +1013,15 @@
                 },
                 "position": {
                     "x": 840,
-                    "y": -210
+                    "y": -150
                 },
                 "z": 3,
                 "parent": "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                 "embeds": [],
                 "iscontainedinside": [
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
@@ -1123,12 +1148,15 @@
                 },
                 "position": {
                     "x": 840,
-                    "y": -120
+                    "y": -60
                 },
                 "z": 3,
                 "parent": "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                 "embeds": [],
                 "iscontainedinside": [
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
                     "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
@@ -1377,6 +1405,9 @@
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4"
                 ]
             },
@@ -1393,6 +1424,9 @@
                 "parent": "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                 "embeds": [],
                 "iscontainedinside": [
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
@@ -1641,6 +1675,9 @@
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4"
                 ]
             },
@@ -1773,7 +1810,145 @@
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
+                    "766180e3-b0d5-422d-8406-6afb79f6e9f4",
                     "766180e3-b0d5-422d-8406-6afb79f6e9f4"
+                ]
+            },
+            "eff9d598-2677-4529-970a-f9c418601b0f": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 840,
+                    "y": -310
+                },
+                "z": 3,
+                "parent": "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                "embeds": [],
+                "iscontainedinside": [
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2",
+                    "97c27e3a-f4de-4265-9c3c-74b2c42b79f2"
+                ],
+                "dependson": [
+                    "d3e4ba0e-c8fc-4e3e-a364-52080418b68e"
                 ]
             }
         }
@@ -2237,6 +2412,45 @@
                     "id": "8daebbaa-dfba-4fa8-8140-e60f45cd9523"
                 }
             }
+        },
+        "JiraNode3": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "AvailabilityZone": {
+                    "Ref": "Zone"
+                },
+                "ImageId": "ami-0cc0a36f626a4fdf5",
+                "InstanceType": {
+                    "Ref": "InstanceTypeParameter"
+                },
+                "KeyName": {
+                    "Ref": "KeyPair"
+                },
+                "NetworkInterfaces": [
+                    {
+                        "DeviceIndex": "0",
+                        "SubnetId": {
+                            "Ref": "Subnet"
+                        },
+                        "GroupSet": [
+                            {
+                                "Ref": "SSHSecurityGroup"
+                            },
+                            {
+                                "Ref": "JiraSecurityGroup"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "eff9d598-2677-4529-970a-f9c418601b0f"
+                }
+            },
+            "DependsOn": [
+                "JiraServerRoute"
+            ]
         }
     }
 }
