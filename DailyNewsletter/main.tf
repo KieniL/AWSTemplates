@@ -8,8 +8,8 @@ provider "aws" {
 resource "aws_dynamodb_table" "subscriber_table" {
   name           = var.tableName
   billing_mode   = "PROVISIONED"
-  read_capacity  = 20
-  write_capacity = 20
+  read_capacity  = 5
+  write_capacity = 5
   hash_key       = "Mailaddress"
 
   attribute {
@@ -94,7 +94,7 @@ resource "aws_iam_role_policy" "dynamo_policy" {
               "logs:CreateLogStream",
               "logs:PutLogEvents"
           ],
-          "Resource": "arn:aws:logs:eu-west-1:${var.accountId}:*"
+          "Resource": "arn:aws:logs:${var.region}:${var.accountId}:*"
       },
       {
           "Effect": "Allow",
@@ -103,30 +103,23 @@ resource "aws_iam_role_policy" "dynamo_policy" {
               "kms:Decrypt"
           ],
           "Resource": "*"
-      }
+        }
     ]
   }
   EOF
 }
 
-resource "aws_cloudwatch_log_group" "dynamo_loggroup" {
-  name = "/aws/lambda/dynamo-function"
-
-  tags = {
-    project = var.projectTagValue
-  }
-}
 
 
 #Lambda Function which adds the users in db to sqs
 resource "aws_lambda_function" "dynamo_lambda" {
   filename      = "dynamo-function.zip"
-  function_name = "dynamo-function"
+  function_name = var.dynamoFunctionName
   role          = aws_iam_role.iam_for_dynamolambda.arn
   memory_size   = 128
   handler       = "lambda_function.lambda_handler"
   depends_on = [
-    aws_cloudwatch_log_group.dynamo_loggroup,
+    aws_cloudwatch_log_group.dynamo_log,
   ]
 
   # The filebase64sha256() function is available in Terraform 0.11.12 and later
@@ -143,6 +136,16 @@ resource "aws_lambda_function" "dynamo_lambda" {
       queueName = var.queueName
     }
   }
+  tags = {
+    project = var.projectTagValue
+  }
+}
+
+#Loggroup for dynamodb
+resource "aws_cloudwatch_log_group" "dynamo_log" {
+  name              = "/aws/lambda/${var.dynamoFunctionName}"
+  retention_in_days = 7
+
   tags = {
     project = var.projectTagValue
   }
@@ -206,7 +209,7 @@ resource "aws_iam_role_policy" "sqs_policy" {
                 "logs:CreateLogStream",
                 "logs:PutLogEvents"
             ],
-            "Resource": "arn:aws:logs:eu-west-1:${var.accountId}:*"
+            "Resource": "arn:aws:logs:${var.region}:${var.accountId}:*"
         },
         {
           "Effect": "Allow",
@@ -215,30 +218,21 @@ resource "aws_iam_role_policy" "sqs_policy" {
               "kms:Decrypt"
           ],
           "Resource": "*"
-      }
+        }
     ]
   }
   EOF
 }
 
-
-resource "aws_cloudwatch_log_group" "sqs_loggroup" {
-  name = "/aws/lambda/sqs-function"
-
-  tags = {
-    project = var.projectTagValue
-  }
-}
-
 #Lambda Function which adds to ses
 resource "aws_lambda_function" "sqs_lambda" {
   filename      = "sqs-function.zip"
-  function_name = "sqs-function"
+  function_name = var.sqsFunctionName
   role          = aws_iam_role.iam_for_sqslambda.arn
   memory_size   = 128
   handler       = "lambda_function.lambda_handler"
-  depends_on = [
-    aws_cloudwatch_log_group.sqs_loggroup,
+   depends_on = [
+    aws_cloudwatch_log_group.sqs_log,
   ]
 
   # The filebase64sha256() function is available in Terraform 0.11.12 and later
@@ -259,6 +253,19 @@ resource "aws_lambda_function" "sqs_lambda" {
     project = var.projectTagValue
   }
 }
+
+
+
+#Loggroup for sqsdb
+resource "aws_cloudwatch_log_group" "sqs_log" {
+  name              = "/aws/lambda/${var.sqsFunctionName}"
+  retention_in_days = 7
+
+  tags = {
+    project = var.projectTagValue
+  }
+}
+
 
 #The Trigger on when to add the users from dynamodb to sqs
 resource "aws_lambda_event_source_mapping" "sqs_trigger" {

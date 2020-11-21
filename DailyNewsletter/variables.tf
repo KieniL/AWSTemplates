@@ -32,6 +32,16 @@ variable "queueName" {
 
 variable "mailSender" {
   type = string
-  default = "test@example.com"
+  default = "lukaskienast0@gmail.com"
 }
 
+
+variable "dynamoFunctionName" {
+  type = string
+  default = "dynamo-function"
+}
+
+variable "sqsFunctionName" {
+  type = string
+  default = "sqs-function"
+}
