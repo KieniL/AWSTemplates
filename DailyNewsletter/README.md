@@ -1,5 +1,6 @@
 # Blogpost
 
+# In Progress since lambda can't store logs and so the function goes to error
 Mailaddresses can be stored in dynamodb
 
 
