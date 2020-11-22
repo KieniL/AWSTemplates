@@ -23,4 +23,25 @@ make plan for test validation and after validation <br/>
 make run to apply the infrastructure<br/>
 If you need to remove the infrastructure run make remove.
 
-For the functions python is used with a virtualenv ()
+For the functions python is used with a virtualenv.
+The file (named lambda_function.py should create a lambda_handler(event, context) function be located in site-packages folder)
+Run this command in the site-packages directory to zip the code: zip -r9 ~/FILENAME.zip .
+
+
+## Workspace commands to use the configuration for multiple environments
+The workspace will be used for tagging the services and also add the workspace as a prepend
+
+### make list-workspace
+Show available workspaces
+
+
+### make new-workspace name=YOURNAME
+Creates a new workspace with the name specified
+
+
+### make select-workspace name=YOURNAME
+select the named workspace
+
+
+### make remove-workspace name=YOURNAME
+remove the named workspace

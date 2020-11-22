@@ -6,7 +6,7 @@ provider "aws" {
 
 #DynamoDb for storing mailaddresses
 resource "aws_dynamodb_table" "subscriber_table" {
-  name           = var.tableName
+  name           = "${terraform.workspace}-${var.tableName}"
   billing_mode   = "PROVISIONED"
   read_capacity  = 5
   write_capacity = 5
@@ -24,12 +24,13 @@ resource "aws_dynamodb_table" "subscriber_table" {
 
   tags = {
     project = var.projectTagValue
+    environment = terraform.workspace
   }
 }
 
 #SQS for storing the users which should receive the mail
 resource "aws_sqs_queue" "subscriber_queue" {
-  name                      = var.queueName
+  name                      = "${terraform.workspace}-${var.queueName}"
   max_message_size          = 262144
   message_retention_seconds = 86400
   kms_master_key_id         = "alias/aws/sqs"
@@ -37,12 +38,13 @@ resource "aws_sqs_queue" "subscriber_queue" {
 
   tags = {
     project = var.projectTagValue
+    environment = terraform.workspace
   }
 }
 
 #Role which retrieves the users from dynamodb and add to sqs
 resource "aws_iam_role" "iam_for_dynamolambda" {
-  name = "iam_for_dynamolambda"
+  name = "${terraform.workspace}-iam_for_dynamolambda"
 
   assume_role_policy = <<EOF
 {
@@ -61,12 +63,13 @@ resource "aws_iam_role" "iam_for_dynamolambda" {
 EOF
   tags = {
     project = var.projectTagValue
+    environment = terraform.workspace
   }
 }
 
 
 resource "aws_iam_role_policy" "dynamo_policy" {
-  name = "dynamo_policy"
+  name = "${terraform.workspace}-dynamo_policy"
   role = aws_iam_role.iam_for_dynamolambda.id
 
   policy = <<-EOF
@@ -114,7 +117,7 @@ resource "aws_iam_role_policy" "dynamo_policy" {
 #Lambda Function which adds the users in db to sqs
 resource "aws_lambda_function" "dynamo_lambda" {
   filename      = "dynamo-function.zip"
-  function_name = var.dynamoFunctionName
+  function_name = "${terraform.workspace}-${var.dynamoFunctionName}"
   role          = aws_iam_role.iam_for_dynamolambda.arn
   memory_size   = 128
   handler       = "lambda_function.lambda_handler"
@@ -131,23 +134,25 @@ resource "aws_lambda_function" "dynamo_lambda" {
 
   environment {
     variables = {
-      tableName = var.tableName,
+      tableName = "${terraform.workspace}-${var.tableName}",
       region    = var.region,
-      queueName = var.queueName
+      queueName = "${terraform.workspace}-${var.queueName}"
     }
   }
   tags = {
     project = var.projectTagValue
+    environment = terraform.workspace
   }
 }
 
 #Loggroup for dynamodb
 resource "aws_cloudwatch_log_group" "dynamo_log" {
-  name              = "/aws/lambda/${var.dynamoFunctionName}"
+  name              = "/aws/lambda/${terraform.workspace}-${var.dynamoFunctionName}"
   retention_in_days = 7
 
   tags = {
     project = var.projectTagValue
+    environment = terraform.workspace
   }
 }
 
@@ -156,7 +161,7 @@ resource "aws_cloudwatch_log_group" "dynamo_log" {
 
 #Role which retrieves the sqs and adds to ses
 resource "aws_iam_role" "iam_for_sqslambda" {
-  name = "iam_for_sqslambda"
+  name = "${terraform.workspace}-iam_for_sqslambda"
 
   assume_role_policy = <<EOF
 {
@@ -175,12 +180,13 @@ resource "aws_iam_role" "iam_for_sqslambda" {
 EOF
   tags = {
     project = var.projectTagValue
+    environment = terraform.workspace
   }
 }
 
 
 resource "aws_iam_role_policy" "sqs_policy" {
-  name = "sqs_policy"
+  name = "${terraform.workspace}-sqs_policy"
   role = aws_iam_role.iam_for_sqslambda.id
 
   policy = <<-EOF
@@ -227,7 +233,7 @@ resource "aws_iam_role_policy" "sqs_policy" {
 #Lambda Function which adds to ses
 resource "aws_lambda_function" "sqs_lambda" {
   filename      = "sqs-function.zip"
-  function_name = var.sqsFunctionName
+  function_name = "${terraform.workspace}-${var.sqsFunctionName}"
   role          = aws_iam_role.iam_for_sqslambda.arn
   memory_size   = 128
   handler       = "lambda_function.lambda_handler"
@@ -246,11 +252,12 @@ resource "aws_lambda_function" "sqs_lambda" {
     variables = {
       senderName = var.mailSender,
       region    = var.region,
-      queueName = var.queueName
+      queueName = "${terraform.workspace}-${var.queueName}"
     }
   }
   tags = {
     project = var.projectTagValue
+    environment = terraform.workspace
   }
 }
 
@@ -258,11 +265,12 @@ resource "aws_lambda_function" "sqs_lambda" {
 
 #Loggroup for sqsdb
 resource "aws_cloudwatch_log_group" "sqs_log" {
-  name              = "/aws/lambda/${var.sqsFunctionName}"
+  name              = "/aws/lambda/${terraform.workspace}-${var.sqsFunctionName}"
   retention_in_days = 7
 
   tags = {
     project = var.projectTagValue
+    environment = terraform.workspace
   }
 }
 
