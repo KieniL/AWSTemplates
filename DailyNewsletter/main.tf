@@ -119,7 +119,7 @@ resource "aws_lambda_function" "dynamo_lambda" {
   filename      = "dynamo-function.zip"
   function_name = "${terraform.workspace}-${var.dynamoFunctionName}"
   role          = aws_iam_role.iam_for_dynamolambda.arn
-  memory_size   = 128
+  memory_size   = 384
   handler       = "lambda_function.lambda_handler"
   depends_on = [
     aws_cloudwatch_log_group.dynamo_log,
