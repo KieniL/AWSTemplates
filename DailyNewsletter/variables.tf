@@ -5,7 +5,7 @@ variable "credentialFile" {
 
 variable "accountId" {
   type = string
-  default = "680785598240"
+  default = "ACCOUNTID"
 }
 
 variable "region" {
