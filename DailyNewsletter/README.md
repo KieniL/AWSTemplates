@@ -45,3 +45,11 @@ select the named workspace
 
 ### make remove-workspace name=YOURNAME
 remove the named workspace
+
+
+
+# Cost Analysis:
+The storage pricing for dynamoDB is based on the amount of mailaddresses stored in db
+SQS can be 0,4 $ per 1 Million Requests
+Dynamo Function is one Function Call to fill in the SQS which will be less than SQS Function and can be improved by putting more MB (MB and execution Time needs to be analyzed)
+SQS Funciton can be expensive since every single entry in sqs triggers one Function call
