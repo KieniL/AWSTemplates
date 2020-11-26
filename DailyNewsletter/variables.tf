@@ -3,11 +3,6 @@ variable "credentialFile" {
   default = "/home/lukas/.aws/credentials"
 }
 
-variable "accountId" {
-  type = string
-  default = "ACCOUNTID"
-}
-
 variable "region" {
   type = string
   default = "eu-central-1"

@@ -4,6 +4,9 @@ provider "aws" {
   profile                 = "default"
 }
 
+#Call the identity to use the accountId
+data "aws_caller_identity" "current" {}
+
 #DynamoDb for storing mailaddresses
 resource "aws_dynamodb_table" "subscriber_table" {
   name           = "${terraform.workspace}-${var.tableName}"
@@ -97,7 +100,7 @@ resource "aws_iam_role_policy" "dynamo_policy" {
               "logs:CreateLogStream",
               "logs:PutLogEvents"
           ],
-          "Resource": "arn:aws:logs:${var.region}:${var.accountId}:*"
+          "Resource": "arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"
       },
       {
           "Effect": "Allow",
@@ -215,7 +218,7 @@ resource "aws_iam_role_policy" "sqs_policy" {
                 "logs:CreateLogStream",
                 "logs:PutLogEvents"
             ],
-            "Resource": "arn:aws:logs:${var.region}:${var.accountId}:*"
+            "Resource": "arn:aws:logs:${var.region}:${data.aws_caller_identity.current.account_id}:*"
         },
         {
           "Effect": "Allow",
