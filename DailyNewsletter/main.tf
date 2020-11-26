@@ -26,21 +26,21 @@ resource "aws_dynamodb_table" "subscriber_table" {
   }
 
   tags = {
-    project = var.projectTagValue
+    project     = var.projectTagValue
     environment = terraform.workspace
   }
 }
 
 #SQS for storing the users which should receive the mail
 resource "aws_sqs_queue" "subscriber_queue" {
-  name                      = "${terraform.workspace}-${var.queueName}"
-  max_message_size          = 262144
-  message_retention_seconds = 86400
-  kms_master_key_id         = "alias/aws/sqs"
+  name                              = "${terraform.workspace}-${var.queueName}"
+  max_message_size                  = 262144
+  message_retention_seconds         = 86400
+  kms_master_key_id                 = "alias/aws/sqs"
   kms_data_key_reuse_period_seconds = 300
 
   tags = {
-    project = var.projectTagValue
+    project     = var.projectTagValue
     environment = terraform.workspace
   }
 }
@@ -65,7 +65,7 @@ resource "aws_iam_role" "iam_for_dynamolambda" {
 }
 EOF
   tags = {
-    project = var.projectTagValue
+    project     = var.projectTagValue
     environment = terraform.workspace
   }
 }
@@ -143,7 +143,7 @@ resource "aws_lambda_function" "dynamo_lambda" {
     }
   }
   tags = {
-    project = var.projectTagValue
+    project     = var.projectTagValue
     environment = terraform.workspace
   }
 }
@@ -154,7 +154,7 @@ resource "aws_cloudwatch_log_group" "dynamo_log" {
   retention_in_days = 7
 
   tags = {
-    project = var.projectTagValue
+    project     = var.projectTagValue
     environment = terraform.workspace
   }
 }
@@ -182,7 +182,7 @@ resource "aws_iam_role" "iam_for_sqslambda" {
 }
 EOF
   tags = {
-    project = var.projectTagValue
+    project     = var.projectTagValue
     environment = terraform.workspace
   }
 }
@@ -240,7 +240,7 @@ resource "aws_lambda_function" "sqs_lambda" {
   role          = aws_iam_role.iam_for_sqslambda.arn
   memory_size   = 128
   handler       = "lambda_function.lambda_handler"
-   depends_on = [
+  depends_on = [
     aws_cloudwatch_log_group.sqs_log,
   ]
 
@@ -254,12 +254,12 @@ resource "aws_lambda_function" "sqs_lambda" {
   environment {
     variables = {
       senderName = var.mailSender,
-      region    = var.region,
-      queueName = "${terraform.workspace}-${var.queueName}"
+      region     = var.region,
+      queueName  = "${terraform.workspace}-${var.queueName}"
     }
   }
   tags = {
-    project = var.projectTagValue
+    project     = var.projectTagValue
     environment = terraform.workspace
   }
 }
@@ -272,7 +272,7 @@ resource "aws_cloudwatch_log_group" "sqs_log" {
   retention_in_days = 7
 
   tags = {
-    project = var.projectTagValue
+    project     = var.projectTagValue
     environment = terraform.workspace
   }
 }

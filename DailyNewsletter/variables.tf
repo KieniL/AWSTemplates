@@ -1,42 +1,42 @@
 variable "credentialFile" {
-  type = string
+  type    = string
   default = "/home/lukas/.aws/credentials"
 }
 
 variable "region" {
-  type = string
+  type    = string
   default = "eu-central-1"
 }
 
 variable "projectTagValue" {
-  type = string
+  type    = string
   default = "Newsletter"
 }
 
 
 variable "tableName" {
-  type = string
+  type    = string
   default = "subscribetable"
 }
 
 
 variable "queueName" {
-  type = string
+  type    = string
   default = "subscribequeue"
 }
 
 variable "mailSender" {
-  type = string
+  type    = string
   default = "lukaskienast0@gmail.com"
 }
 
 
 variable "dynamoFunctionName" {
-  type = string
+  type    = string
   default = "dynamo-function"
 }
 
 variable "sqsFunctionName" {
-  type = string
+  type    = string
   default = "sqs-function"
 }
