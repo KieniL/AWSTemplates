@@ -40,3 +40,8 @@ variable "sqsFunctionName" {
   type    = string
   default = "sqs-function"
 }
+
+variable "snsName" {
+  type    = string
+  default = "newsletter-topic"
+}

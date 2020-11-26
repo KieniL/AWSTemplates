@@ -284,3 +284,24 @@ resource "aws_lambda_event_source_mapping" "sqs_trigger" {
   function_name    = aws_lambda_function.sqs_lambda.arn
 }
 
+
+resource "aws_lambda_permission" "with_sns" {
+  statement_id  = "AllowExecutionFromSNS"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.dynamo_lambda.function_name
+  principal     = "sns.amazonaws.com"
+  source_arn    = aws_sns_topic.newsletter_topic.arn
+}
+
+resource "aws_sns_topic" "newsletter_topic" {
+  name = "${terraform.workspace}-${var.snsName}"
+  kms_master_key_id = "alias/aws/sns"
+}
+
+
+resource "aws_sns_topic_subscription" "newsletter_topic_subscription" {
+  topic_arn = aws_sns_topic.newsletter_topic.arn
+  protocol  = "lambda"
+  endpoint  = aws_lambda_function.dynamo_lambda.arn
+}
+
