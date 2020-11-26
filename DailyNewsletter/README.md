@@ -3,7 +3,7 @@
 Mailaddresses can be stored in dynamodb
 
 
-On a trigger (not defined in this example) the dynamo-function is called which then reads all mailaddresses and adds them to the queue.<br/>
+On a trigger (SNS) the dynamo-function is called which then reads all mailaddresses and adds them to the queue.<br/>
 
 If the queue is inserted the sqs-function is called which then reads the mailaddress and tries to send the mail with SES
 
