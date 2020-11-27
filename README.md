@@ -8,4 +8,5 @@ Storing of AWS Cloudformation Templates with Diagramms for different purposes
 * JiraEval (Creates an Instance with Jira and Postgres for Evaluation)
 * WebServer (Installs a basic configured WebServer)
 * WordPress (Creates an Instance with dockerized WordPress and MySQL)
-* Blogpost (See Readme in the folder for more information)
+* DailyNewsletter (See Readme in the folder for more information)
+* s3-angular (See Readme in the folder for more information)

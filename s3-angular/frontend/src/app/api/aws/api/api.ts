@@ -1,0 +1,13 @@
+export * from './image.service';
+import { ImageService } from './image.service';
+export * from './instancetype.service';
+import { InstancetypeService } from './instancetype.service';
+export * from './keypair.service';
+import { KeypairService } from './keypair.service';
+export * from './securitygroup.service';
+import { SecuritygroupService } from './securitygroup.service';
+export * from './vm.service';
+import { VmService } from './vm.service';
+export * from './vpc.service';
+import { VpcService } from './vpc.service';
+export const APIS = [ImageService, InstancetypeService, KeypairService, SecuritygroupService, VmService, VpcService];
