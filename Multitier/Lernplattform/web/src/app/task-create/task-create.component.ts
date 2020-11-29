@@ -17,6 +17,8 @@ export class TaskCreateComponent implements OnInit {
   selectedcourse:any;
   filtered: any;
 
+  submitted = false;
+  loading = false;
   constructor(private coursesService: CoursesService,
               private taskService: TasksService,
               private router: Router,
@@ -34,7 +36,8 @@ export class TaskCreateComponent implements OnInit {
   }
 
   onSubmit() {
-
+    this.submitted = true;
+    this.loading = true;
     let task:Task = {
       name: this.f.name.value,
       description: this.f.description.value,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GetSchemasService, Schema, TablemanageService, FileContent } from '../api/database/index';
+import { templateJitUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-schema-manage',
@@ -19,7 +20,7 @@ export class SchemaManageComponent implements OnInit {
   schemas: Schema[];
 
 
-
+  loading = false;
   constructor(private tablemanageservice: TablemanageService,
               private schemaService: GetSchemasService,
               private router: Router,
@@ -53,6 +54,7 @@ export class SchemaManageComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     if (this.f.selectedschema.value.length > 0){
       let schema:Schema = {
         name: this.f.selectedschema.value

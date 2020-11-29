@@ -25,7 +25,7 @@ export class TaskComponent implements OnInit {
   sql = ["select", "from", "where", "group by", "order by", "insert into", "update"];
 
 
-
+  submitted = false;
   tasklines = [];
 
   private taskid = "";
@@ -33,6 +33,7 @@ export class TaskComponent implements OnInit {
   private formattedFeedback = "";
 
   feedback = [];
+  loading = false;
   constructor(private defaultService: DefaultService,
               private tasksService: TasksService,
               private route: ActivatedRoute,
@@ -66,7 +67,8 @@ export class TaskComponent implements OnInit {
   get f() { return this.tasksolvingform.controls; }
 
   onSubmit() {
-
+    this.submitted = true;
+    this.loading = true;
 
 
     let request:FeedbackRequest = {

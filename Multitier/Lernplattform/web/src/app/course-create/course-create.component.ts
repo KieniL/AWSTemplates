@@ -18,6 +18,9 @@ export class CourseCreateComponent implements OnInit {
 
   selectedschema:any;
 
+  submitted = false;
+  loading = false;
+
   constructor(private courseService: CoursesService,
               private schemaService: GetSchemasService,
               private router: Router,
@@ -32,6 +35,8 @@ export class CourseCreateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+    this.loading = true;
     let course:CourseOverview = {
       name: this.f.name.value,
       schema: this.f.selectedschema.value

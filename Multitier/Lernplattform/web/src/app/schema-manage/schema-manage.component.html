@@ -1,8 +1,8 @@
 <h2>Schema verwalten</h2>
 <form [formGroup]="manageSchemaForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="selectedschema"> Schema </label>
-      <select ng-model="selectedschema"  formControlName="selectedschema" autofocus="true">
+        <label for="selectedschema"> Schema </label>
+        <select ng-model="selectedschema" formControlName="selectedschema" autofocus="true">
           <option value="None"></option>
           <option *ngFor="let schema of schemas"
           [value]="schema.name">
@@ -12,9 +12,8 @@
     </div>
 
     <div class="form-group">
-      <input type='file' (change)="fileChanged($event)">
-      <button type="button" class="btn btn-primary"
-       (click)="uploadDocument()">Upload File</button>
+        <input type='file' (change)="fileChanged($event)">
+        <button type="button" class="btn btn-primary" (click)="uploadDocument($event)">Upload File</button>
     </div>
 
     <div class="form-group">

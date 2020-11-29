@@ -18,7 +18,8 @@ export class SchemaCreateComponent implements OnInit {
   result = "";
 
 
-
+  submitted = false;
+  loading = false;
   constructor(private schemaservice: CreateschemaService,
               private tabledefaultservice: TablescreatedefaultService,
               private tablemanageservice: TablemanageService,
@@ -59,6 +60,8 @@ export class SchemaCreateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+    this.loading = true;
     if (this.f.name.value.length > 0){
       let schema:Schema = {
         name: this.f.name.value

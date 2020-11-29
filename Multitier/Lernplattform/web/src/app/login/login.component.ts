@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
+  submitted = false;
+  loading = false;
   constructor(private loginService: LoginService,
               private router: Router,
               private authenticationService: AuthenticationService,
@@ -28,6 +30,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+    this.loading = true;
     let login:Login = {
       email: this.f.username.value,
       password: this.f.password.value

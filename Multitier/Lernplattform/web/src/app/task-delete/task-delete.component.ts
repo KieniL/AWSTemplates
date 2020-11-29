@@ -18,6 +18,8 @@ export class TaskDeleteComponent implements OnInit {
   selectedcourse:any;
   selectedtask: any;
 
+  loading = false;
+
   constructor(private coursesService: CoursesService,
               private taskService: TasksService,
               private router: Router,
@@ -33,6 +35,7 @@ export class TaskDeleteComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     this.taskService.deleteTask(this.f.selectedcourse.value, this.f.selectedtask.value).subscribe(
       success => {
         this.router.navigate(['/']);

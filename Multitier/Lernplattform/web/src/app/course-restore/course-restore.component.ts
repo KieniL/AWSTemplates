@@ -16,6 +16,7 @@ export class CourseRestoreComponent implements OnInit {
 
   selectedcourse:any;
 
+  loading = false;
   constructor(private coursesService: CoursesService,
               private router: Router,
               private formBuilder: FormBuilder) { }
@@ -29,6 +30,7 @@ export class CourseRestoreComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     let course:Course = {
       id: this.f.selectedcourse.value,
     };

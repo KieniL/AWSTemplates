@@ -16,6 +16,7 @@ export class CourseDeleteComponent implements OnInit {
 
   selectedcourse:any;
 
+  loading = false;
   constructor(private coursesService: CoursesService,
               private router: Router,
               private formBuilder: FormBuilder) { }
@@ -29,6 +30,7 @@ export class CourseDeleteComponent implements OnInit {
   }
 
   onSubmit() {
+    this.loading = true;
     this.coursesService.deleteCourse(this.f.selectedcourse.value).subscribe(
       success => {
         this.router.navigate(['/']);
