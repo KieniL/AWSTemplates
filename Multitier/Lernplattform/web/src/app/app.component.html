@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" [routerLink]="['']">Lernplattform</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLink]="['']">Home</a>
+      <li class="nav-item dropdown" *ngIf="isLoggedIn()">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Databases
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="nav-item nav-link" *ngIf="isLoggedIn()" [routerLink]="['/schemacreate']">Create Schema</a>
+          <a class="nav-item nav-link" *ngIf="isLoggedIn()" [routerLink]="['/schemamanage']">Manage Schema</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" *ngIf="isLoggedIn()">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Courses
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="nav-item nav-link" [routerLink]="['/continue']">Continue Course</a>
+          <a class="nav-item nav-link" [routerLink]="['/courses']">List all Courses</a>
+          <a class="nav-item nav-link" [routerLink]="['/coursesuser']" [queryParams]="{userid:getUserId()}">List my Courses</a>
+          <a class="nav-item nav-link" [routerLink]="['/coursecreate']">Create course</a>
+          <a class="nav-item nav-link" [routerLink]="['/coursedelete']">Delete course</a>
+          <a class="nav-item nav-link" [routerLink]="['/courserestore']">Restore course</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" *ngIf="isLoggedIn()">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Task
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="nav-item nav-link" *ngIf="isLoggedIn()" [routerLink]="['/taskcreate']">Create Task</a>
+          <a class="nav-item nav-link" *ngIf="isLoggedIn()" [routerLink]="['/taskdelete']">Delete Task</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" *ngIf="!isLoggedIn()">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Courses
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="nav-item nav-link" [routerLink]="['/continue']">Continue Course</a>
+          <a class="nav-item nav-link" [routerLink]="['/courses']">List all Courses</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" *ngIf="!isLoggedIn()">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Courses
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="nav-item nav-link" [routerLink]="['/continue']">Continue Course</a>
+          <a class="nav-item nav-link" [routerLink]="['/courses']">List all Courses</a>
+        </div>
+      </li>
+      <a class="nav-item nav-link" *ngIf="!isLoggedIn()" [routerLink]="['/login']">Login</a>
+      <a class="nav-item nav-link" *ngIf="isLoggedIn()" (click)="logout()">Logout</a>
+      <a class="nav-item nav-link" *ngIf="!isLoggedIn()" [routerLink]="['/login']">Login</a>
+      <a class="nav-item nav-link" *ngIf="isLoggedIn()" (click)="logout()">Logout</a>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

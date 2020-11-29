@@ -1,0 +1,13 @@
+*/target/**
+*/.classpath
+.classpath
+/.settings/
+*/bin/*
+*/bin
+/bin/*
+#/.project
+*.properties
+/.factorypath
+**/*.jar
+/.metadata/
+/.vs

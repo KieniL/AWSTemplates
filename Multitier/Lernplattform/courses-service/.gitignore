@@ -1,0 +1,12 @@
+*/target/**
+*/.classpath
+.classpath
+/.settings/
+*/bin/*
+*/bin
+/bin/*
+/.project
+*.properties
+/.factorypath
+**/*.jar
+/src/main/java/at/lernplattform/rest/api/

@@ -11,3 +11,4 @@ Storing of AWS Cloudformation Templates with Diagramms for different purposes
 * DailyNewsletter (See Readme in the folder for more information)
 * s3-angular (See Readme in the folder for more information)
 * ApplicationForm (https://bitbucket.org/lukien/workspace/projects/) Contains a react frontend hosted on s3, a lambda function to process the form and then storing in dynamodb
+* Multitier (an sql lerning app programmed during studies in a team). Angular frontend is hosted on s3, backend (spring) is containerised with ecr and served with ecs and a db with rds

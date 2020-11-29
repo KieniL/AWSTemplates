@@ -1,0 +1,4 @@
+<p>course {{course.id}} - {{course.name}}</p>
+<div *ngFor="let task of course.tasks; let i = index">
+  <a [routerLink]="['/courses', course.id, 'tasks', i+1]"><span>{{task.name}}</span></a>
+</div>
