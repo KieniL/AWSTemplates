@@ -10,3 +10,4 @@ Storing of AWS Cloudformation Templates with Diagramms for different purposes
 * WordPress (Creates an Instance with dockerized WordPress and MySQL)
 * DailyNewsletter (See Readme in the folder for more information)
 * s3-angular (See Readme in the folder for more information)
+* ApplicationForm (https://bitbucket.org/lukien/workspace/projects/) Contains a react frontend hosted on s3, a lambda function to process the form and then storing in dynamodb
