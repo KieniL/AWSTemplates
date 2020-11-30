@@ -1,2 +1,0 @@
-FROM adoptopenjdk/openjdk13:x86_64-alpine-jre13u-nightly
-ENTRYPOINT [ "sh", "-c", "java -jar /mnt/course-service-1.0.0.jar" ]
