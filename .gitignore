@@ -1,3 +1,8 @@
 DailyNewsletter/terraform.tfstate
 DailyNewsletter/terraform.tfstate.backup
 DailyNewsletter/.terraform.tfstate.lock.info
+Multitier/terraform.tfstate
+Multitier/terraform.tfstate.backup
+Multitier/.terraform/modules/modules.json
+Multitier/.terraform/plugins/selections.json
+Multitier/.terraform/plugins/registry.terraform.io/hashicorp/aws/3.18.0/linux_amd64/terraform-provider-aws_v3.18.0_x5

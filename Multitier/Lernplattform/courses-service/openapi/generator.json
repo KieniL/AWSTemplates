@@ -1,0 +1,9 @@
+{
+	"configPackage":"at.lernplattform",
+	"apiPackage":"at.lernplattform.rest.api",
+	"modelPackage":"at.lernplattform.rest.api.model",
+	"interfaceOnly":true,
+	"java8":false,
+	"modelNameSuffix": "Model",
+	"hideGenerationTimestamp": true
+}

@@ -1,0 +1,651 @@
+{
+	"info": {
+		"_postman_id": "570c11c2-7934-4da8-931f-f7b077ded747",
+		"name": "Lernplattform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Get Course",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/courses/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Courses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/courses?deleted=false",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "deleted",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfU0VSVklDRSIsImlhdCI6MTU3MDMwMzYyNCwiZXhwIjoxNjAxODM5NjI0fQ.2qD-Ohg3CQj_nTvTET85lx1WkDpbFxT6EdniV_HkEf_HQQSJ5ft5v4kvM5Rp1n_PVoOOVLImkFn8GvOx7wV2Qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"mynewcourse\",\n\t\"schema\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/courses",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfU0VSVklDRSIsImlhdCI6MTU3MDMwMzYyNCwiZXhwIjoxNjAxODM5NjI0fQ.2qD-Ohg3CQj_nTvTET85lx1WkDpbFxT6EdniV_HkEf_HQQSJ5ft5v4kvM5Rp1n_PVoOOVLImkFn8GvOx7wV2Qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"xx\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/courses/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfU0VSVklDRSIsImlhdCI6MTU3MDMwMzYyNCwiZXhwIjoxNjAxODM5NjI0fQ.2qD-Ohg3CQj_nTvTET85lx1WkDpbFxT6EdniV_HkEf_HQQSJ5ft5v4kvM5Rp1n_PVoOOVLImkFn8GvOx7wV2Qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/courses/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfU0VSVklDRSIsImlhdCI6MTU3MDMwMzYyNCwiZXhwIjoxNjAxODM5NjI0fQ.2qD-Ohg3CQj_nTvTET85lx1WkDpbFxT6EdniV_HkEf_HQQSJ5ft5v4kvM5Rp1n_PVoOOVLImkFn8GvOx7wV2Qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/courses/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Get Task",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/courses/1/tasks/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses",
+								"1",
+								"tasks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Tasks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/courses/2/tasks",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses",
+								"2",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfU0VSVklDRSIsImlhdCI6MTU3MDMwMzYyNCwiZXhwIjoxNjAxODM5NjI0fQ.2qD-Ohg3CQj_nTvTET85lx1WkDpbFxT6EdniV_HkEf_HQQSJ5ft5v4kvM5Rp1n_PVoOOVLImkFn8GvOx7wV2Qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"xx\",\n\t\"description\":\"asdfxx\",\n\t\"code\": \"select * from test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/courses/1/tasks",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses",
+								"1",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfU0VSVklDRSIsImlhdCI6MTU3MDMwMzYyNCwiZXhwIjoxNjAxODM5NjI0fQ.2qD-Ohg3CQj_nTvTET85lx1WkDpbFxT6EdniV_HkEf_HQQSJ5ft5v4kvM5Rp1n_PVoOOVLImkFn8GvOx7wV2Qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"xx21\",\n\t\"description\":\"x2134\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/courses/1/tasks/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses",
+								"1",
+								"tasks",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfU0VSVklDRSIsImlhdCI6MTU3MDMwMzYyNCwiZXhwIjoxNjAxODM5NjI0fQ.2qD-Ohg3CQj_nTvTET85lx1WkDpbFxT6EdniV_HkEf_HQQSJ5ft5v4kvM5Rp1n_PVoOOVLImkFn8GvOx7wV2Qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/courses/2/tasks/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses",
+								"2",
+								"tasks",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Feedback",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfU0VSVklDRSIsImlhdCI6MTU3MDMwMzYyNCwiZXhwIjoxNjAxODM5NjI0fQ.2qD-Ohg3CQj_nTvTET85lx1WkDpbFxT6EdniV_HkEf_HQQSJ5ft5v4kvM5Rp1n_PVoOOVLImkFn8GvOx7wV2Qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"taskid\":\"xx21\",\n\t\"courseid\":\"xx21\",\n\t\"solved\":\"xx21\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/courses/1/tasks/3/feedback",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"courses",
+								"1",
+								"tasks",
+								"3",
+								"feedback"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"lernplattform@gmail.com\",\n\t\"password\":\"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Database",
+			"item": [
+				{
+					"name": "Create Schema",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfU0VSVklDRSIsImlhdCI6MTU3MDMwMzYyNCwiZXhwIjoxNjAxODM5NjI0fQ.2qD-Ohg3CQj_nTvTET85lx1WkDpbFxT6EdniV_HkEf_HQQSJ5ft5v4kvM5Rp1n_PVoOOVLImkFn8GvOx7wV2Qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"newschema\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8000/database/schemacreate",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"database",
+								"schemacreate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Manage Tables",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfU0VSVklDRSIsImlhdCI6MTU3MDMwMzYyNCwiZXhwIjoxNjAxODM5NjI0fQ.2qD-Ohg3CQj_nTvTET85lx1WkDpbFxT6EdniV_HkEf_HQQSJ5ft5v4kvM5Rp1n_PVoOOVLImkFn8GvOx7wV2Qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"content\":\"CREATE TABLE NEWTABLE ( id int, entity VARCHAR(255));\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8000/database/tablemanage/testschema",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"database",
+								"tablemanage",
+								"testschema"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Default Tables",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiYXV0aCI6IlJPTEVfU0VSVklDRSIsImlhdCI6MTU3MDMwMzYyNCwiZXhwIjoxNjAxODM5NjI0fQ.2qD-Ohg3CQj_nTvTET85lx1WkDpbFxT6EdniV_HkEf_HQQSJ5ft5v4kvM5Rp1n_PVoOOVLImkFn8GvOx7wV2Qw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/database/tablescreatedefault/myschema",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"database",
+								"tablescreatedefault",
+								"myschema"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Schemas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/database/getschemas?userid=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"database",
+								"getschemas"
+							],
+							"query": [
+								{
+									"key": "userid",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

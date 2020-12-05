@@ -1,0 +1,120 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Database Service
+servers:
+  - url: api/db
+paths:
+  /database/getschemas:
+    get:
+      summary: Get Schemas
+      operationId: getSchemas
+      tags:
+        -  getSchemas
+      parameters:
+        - $ref: "#/components/parameters/userid"
+      responses:
+        200:
+          description: Schemas
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/SchemaList'
+  /database/schemacreate:
+    post:
+      summary: Create a Schema
+      operationId: schemacreate
+      tags:
+        -  createschema
+      requestBody:
+        description: Source
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schema'
+      responses:
+        200:
+          description: New Schema
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Schemaresponse'
+  /database/tablescreatedefault/{schemaname}:
+    parameters:
+      - $ref: '#/components/parameters/schemaname'
+    post:
+      summary: Create Default Tables based on Northwind
+      operationId: tablescreatedefault
+      tags:
+        -  tablescreatedefault
+      responses:
+        200:
+          description: Schema with Northwind Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schemaresponse'
+  /database/tablemanage/{schemaname}:
+    parameters:
+      - $ref: '#/components/parameters/schemaname'
+    post:
+      summary: Manage Table in defined schema
+      operationId: tablemanage
+      tags:
+        -  tablemanage
+      requestBody:
+        description: Source
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileContent'
+      responses:
+        200:
+          description: Schema with defined Table
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schemaresponse'
+components:
+  parameters:
+    schemaname:
+      name: schemaname
+      in: path
+      required: true
+      description: Name of the Schema where to create
+      schema:
+        type: string
+    userid:
+      name: userid
+      in: query
+      required: true
+      description: User ID
+      schema:
+        type: string
+  schemas:
+    SchemaList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Schema'
+    Schema:
+      required:
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    FileContent:
+      required:
+        - content
+      properties:
+        content:
+          type: string
+    Schemaresponse:
+      required:
+        - response
+      properties:
+        response:
+          type: string
