@@ -1,0 +1,16 @@
+
+# tasks file for infrastructure
+---
+- name: terraforming
+  terraform:
+    project_path: "{{ playbook_dir }}/roles/infrastructure/terraform"
+    force_init: true
+    state: "{{ state }}"
+    variables:
+      project_name: "{{ project_name }}"
+      region: "{{ region }}"
+      cidr_block: "{{cidr_block}}"
+      subnet_a_cidr_block: "{{ subnet_a_cidr_block }}"
+      subnet_b_cidr_block: "{{ subnet_b_cidr_block }}"
+      local_ip: "{{local_ip}}/32"
+  register: tf
