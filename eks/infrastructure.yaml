@@ -3,12 +3,12 @@
   become: false
   gather_facts: no
   vars:
-    state: present
+    state: absent
     project_name: demo
+    environmentid: test
     region: eu-central-1
     cidr_block: 10.0.0.0/16
-    subnet_a_cidr_block: 10.0.1.0/24
-    subnet_b_cidr_block: 10.0.2.0/24
-    local_ip: 1.2.3.4
+    subnet_public_cidr_block: 10.0.1.0/24
+    subnet_private_cidr_block: 10.0.2.0/24
   roles:
     - infrastructure

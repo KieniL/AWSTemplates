@@ -7,10 +7,14 @@
     force_init: true
     state: "{{ state }}"
     variables:
-      project_name: "{{ project_name }}"
+      cluster_name: "{{ project_name }}"
+      environment: "{{ environmentid }}"
       region: "{{ region }}"
       cidr_block: "{{cidr_block}}"
-      subnet_a_cidr_block: "{{ subnet_a_cidr_block }}"
-      subnet_b_cidr_block: "{{ subnet_b_cidr_block }}"
-      local_ip: "{{local_ip}}/32"
+      subnet_public_cidr_block: "{{ subnet_public_cidr_block }}"
+      subnet_private_cidr_block: "{{ subnet_private_cidr_block }}"
   register: tf
+
+
+- debug:
+    msg: "{{tf}}"
