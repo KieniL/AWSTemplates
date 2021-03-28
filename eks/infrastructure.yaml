@@ -3,12 +3,16 @@
   become: false
   gather_facts: no
   vars:
-    state: absent
+    state: present
     project_name: demo
     environmentid: test
     region: eu-central-1
-    cidr_block: 10.0.0.0/16
-    subnet_public_cidr_block: 10.0.1.0/24
-    subnet_private_cidr_block: 10.0.2.0/24
+    min_nodes: 3
+    max_nodes: 5
+    instance_type: t2.micro
+    #cidr_block: 10.0.0.0/16
+    #subnet_public_cidr_block: 10.0.1.0/24
+    #subnet_private_cidr_block: 10.0.2.0/24
+    kubeconfig: /home/lukas/.kube/eks.config
   roles:
     - infrastructure

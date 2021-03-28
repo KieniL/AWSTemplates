@@ -1,20 +1,64 @@
 
 # tasks file for infrastructure
 ---
-- name: terraforming
-  terraform:
-    project_path: "{{ playbook_dir }}/roles/infrastructure/terraform"
-    force_init: true
-    state: "{{ state }}"
-    variables:
-      cluster_name: "{{ project_name }}"
-      environment: "{{ environmentid }}"
-      region: "{{ region }}"
-      cidr_block: "{{cidr_block}}"
-      subnet_public_cidr_block: "{{ subnet_public_cidr_block }}"
-      subnet_private_cidr_block: "{{ subnet_private_cidr_block }}"
-  register: tf
+- name: check if cluster already exists
+  shell: |
+    eksctl get cluster \
+    --name "{{ project_name }}-{{ environmentid }}-cluster" \
+    --region "{{ region }}"
+  register: cluster
+  ignore_errors: True
+  when: state == "present"
 
+- name: create cluster
+  shell: | 
+    eksctl create cluster \
+    --name "{{ project_name }}-{{ environmentid }}-cluster" \
+    --node-type "{{ instance_type }}" \
+    --nodes "{{ min_nodes }}" \
+    --nodes-min "{{ min_nodes }}" \
+    --nodes-max "{{ max_nodes }}" \
+    --region "{{ region }}"
+    --kubeconfig "{{ kubeconfig }}"
+  when: state == "present" and cluster.stdout == ""
 
-- debug:
-    msg: "{{tf}}"
+- name: upgrade cluster
+  shell: | 
+    eksctl upgrade cluster \
+    --name "{{ project_name }}-{{ environmentid }}-cluster" \
+    --node-type "{{ instance_type }}" \
+    --nodes "{{ min_nodes }}" \
+    --nodes-min "{{ min_nodes }}" \
+    --nodes-max "{{ max_nodes }}" \
+    --region "{{ region }}" \
+    --kubeconfig "{{ kubeconfig }}"
+  when: state == "present" and cluster.stdout != "" 
+
+- name: delete cluster
+  shell: | 
+    eksctl delete cluster \
+    --name "{{ project_name }}-{{ environmentid }}-cluster" \
+    --region "{{ region }}"
+  when: state == "absent"
+
+#- name: terraforming
+#  terraform:
+#    project_path: "{{ playbook_dir }}/roles/infrastructure/terraform"
+#    force_init: true
+#    state: "{{ state }}"
+#    variables:
+#      cluster_name: "{{ project_name }}"
+#      environment: "{{ environmentid }}"
+#      region: "{{ region }}"
+#      cidr_block: "{{cidr_block}}"
+#      subnet_public_cidr_block: "{{ subnet_public_cidr_block }}"
+#      subnet_private_cidr_block: "{{ subnet_private_cidr_block }}"
+#  register: tf
+
+#- name: create kubeconfig
+#  shell: |
+#    aws eks \
+#    --region "{{ region }}" update-kubeconfig \
+#    --name "{{ project_name }}-{{ environmentid }}-cluster" \
+#    --kubeconfig "{{ kubeconfig }}"
+#  when: state == "present"

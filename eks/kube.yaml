@@ -1,0 +1,12 @@
+- hosts: localhost
+  tags: infrastructuresetup
+  become: false
+  gather_facts: no
+  vars:
+    jupyterhub_version: 0.11.1
+    jupyter_release_name: jhub
+    jupyter_namespace_name: jhub
+  roles:
+    - jupyterhub
+  environment:
+    K8S_AUTH_KUBECONFIG: /home/lukas/.kube/eks.config

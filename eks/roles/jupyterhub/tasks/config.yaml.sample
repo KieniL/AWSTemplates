@@ -1,0 +1,18 @@
+hub:
+  config:
+    Authenticator:
+      admin_users:
+        - lukas
+      allowed_users:
+        - kathi
+    DummyAuthenticator:
+      password: PW
+proxy:
+  secretToken: "TOKEN"
+  service:
+    type: ClusterIP
+ingress:
+  enabled: true
+  hosts: [
+    jupyterhub.kieni.at
+  ]

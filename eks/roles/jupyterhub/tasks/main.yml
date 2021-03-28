@@ -1,0 +1,12 @@
+---
+# tasks file for jupyterhub
+- name: install jupyterhub
+  shell: |
+    RELEASE="{{ jupyter_release_name }}"
+    NAMESPACE="{{ jupyter_namespace_name }}"
+    helm upgrade --cleanup-on-fail \
+      --install $RELEASE jupyterhub/jupyterhub \
+      --namespace $NAMESPACE \
+      --create-namespace \
+      --version="{{ jupyterhub_version }}" \
+      --values "{{ playbook_dir }}/roles/jupyterhub/tasks/config.yaml"
