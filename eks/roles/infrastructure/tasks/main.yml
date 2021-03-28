@@ -8,7 +8,7 @@
     --region "{{ region }}"
   register: cluster
   ignore_errors: True
-  when: state == "present"
+  when: state == "present" or state == "Update"
 
 - name: create cluster
   shell: | 
@@ -21,18 +21,16 @@
     --region "{{ region }}"
     --kubeconfig "{{ kubeconfig }}"
   when: state == "present" and cluster.stdout == ""
-
-- name: upgrade cluster
-  shell: | 
-    eksctl upgrade cluster \
-    --name "{{ project_name }}-{{ environmentid }}-cluster" \
-    --node-type "{{ instance_type }}" \
-    --nodes "{{ min_nodes }}" \
-    --nodes-min "{{ min_nodes }}" \
-    --nodes-max "{{ max_nodes }}" \
-    --region "{{ region }}" \
-    --kubeconfig "{{ kubeconfig }}"
-  when: state == "present" and cluster.stdout != "" 
+  
+- name: scale cluster
+  shell: |
+    eksctl scale nodegroup \
+    --cluster="{{ project_name }}-{{ environmentid }}-cluster" \
+    --name="{{ project_name }}-{{ environmentid }}-cluster" \
+    --nodes="{{ min_nodes }}" \
+    --nodes-min="{{ min_nodes }}" \
+    --nodes-max="{{ max_nodes }}"
+  when: state == "present" and cluster.stdout != ""
 
 - name: delete cluster
   shell: | 
