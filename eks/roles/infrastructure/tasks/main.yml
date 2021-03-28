@@ -22,11 +22,30 @@
     --kubeconfig "{{ kubeconfig }}"
   when: state == "present" and cluster.stdout == ""
   
+- name: get nodegroup
+  shell: |
+    eksctl get nodegroup \
+    --cluster="{{ project_name }}-{{ environmentid }}-cluster" -o yaml |\
+    grep -w " ng"
+  register: nodegroup
+  when: state == "present" and cluster.stdout != ""
+
+
+- name: parse nodegroup output
+  set_fact:
+    nodegroupname: "{{ nodegroup.stdout.split(': ')[1] }}"
+  when: state == "present" and cluster.stdout != ""
+
+- name: nodegroupname
+  debug:
+    msg: "{{nodegroupname}}"
+  when: state == "present" and cluster.stdout != ""
+
 - name: scale cluster
   shell: |
     eksctl scale nodegroup \
     --cluster="{{ project_name }}-{{ environmentid }}-cluster" \
-    --name="{{ project_name }}-{{ environmentid }}-cluster" \
+    --name="{{ nodegroupname }}" \
     --nodes="{{ min_nodes }}" \
     --nodes-min="{{ min_nodes }}" \
     --nodes-max="{{ max_nodes }}"
