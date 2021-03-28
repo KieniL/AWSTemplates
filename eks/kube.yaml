@@ -6,7 +6,8 @@
     jupyterhub_version: 0.11.1
     jupyter_release_name: jhub
     jupyter_namespace_name: jhub
+    state: present
   roles:
-    - jupyterhub
+    - kube
   environment:
     K8S_AUTH_KUBECONFIG: /home/lukas/.kube/eks.config

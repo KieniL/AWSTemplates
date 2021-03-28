@@ -1,0 +1,28 @@
+---
+# tasks file for jupyterhub
+- name: Install metricsserver
+  k8s:
+    state: "{{ state }}"
+    definition: "{{ item }}"
+  with_items: "{{lookup('url', 'https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml', split_lines=False) | from_yaml_all | list}}"
+  when: item is not none
+
+- name: install jhub
+  shell: |
+    RELEASE="{{ jupyter_release_name }}"
+    NAMESPACE="{{ jupyter_namespace_name }}"
+    helm upgrade --cleanup-on-fail \
+      --install $RELEASE jupyterhub/jupyterhub \
+      --namespace $NAMESPACE \
+      --create-namespace \
+      --version="{{ jupyterhub_version }}" \
+      --values "{{ playbook_dir }}/roles/kube/tasks/config.yaml"
+  when: state == "present"
+
+- name: uninstall jhub
+  shell: |
+    RELEASE="{{ jupyter_release_name }}"
+    NAMESPACE="{{ jupyter_namespace_name }}"
+    helm uninstall $RELEASE jupyterhub/jupyterhub \
+      --namespace $NAMESPACE \
+  when: state == "absent"
