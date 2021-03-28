@@ -1,20 +1,20 @@
 variable "region" {
-  type = string
+  type        = string
   description = "The region to deploy to- Replaced by Ansible Playbook on run"
 }
 
 variable "cidr_block" {
-  type = string
+  type        = string
   description = "The cidr_block to set in VPC- Replaced by Ansible Playbook on run"
 }
 
 variable "subnet_public_cidr_block" {
-  type = string
+  type        = string
   description = "The cidr_block to set in public subnet- Replaced by Ansible Playbook on run"
 }
 
 variable "ip_adresses" {
-  type = list(string)
+  type        = list(string)
   description = "The ip addresses allowed for ssh access- Replaced by Ansible Playbook on run"
 }
 
@@ -23,21 +23,26 @@ variable "app" {
 }
 
 variable "environment" {
-  type = string
+  type        = string
   description = "the name of your environment, e.g. \"prod\""
 }
 
 variable "instance_type" {
-  type = string
+  type        = string
   description = "The instancetype to use"
 }
 
 variable "ami_bastion" {
-  type = string
+  type        = string
   description = "The ami to use for the bastion"
 }
 
 variable "ami_webserver" {
-  type = string
+  type        = string
   description = "The ami to use for the webserver"
+}
+
+variable "key_name" {
+  type        = string
+  description = "the name of the keypair for ssh"
 }

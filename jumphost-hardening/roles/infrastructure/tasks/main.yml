@@ -15,4 +15,5 @@
       ami_webserver: "{{ ami_webserver }}"
       subnet_public_cidr_block: "{{ subnet_public_cidr_block }}"
       ip_adresses: "{{ ip_adresses | list | to_json }}"
+      key_name: "{{ key_name }}"
   register: tf

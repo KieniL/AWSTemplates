@@ -97,11 +97,20 @@ resource "aws_security_group" "web" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   ingress {
     from_port = 22
     to_port   = 22
     protocol  = "tcp"
+    cidr_blocks = [
+      "${aws_instance.bastion.private_ip}/32"
+    ]
     security_groups = [
       aws_security_group.bastion.id
     ]
@@ -134,18 +143,19 @@ EOF
 }
 
 #Create instance profile
-resource "aws_iam_instance_profile" "web_profile" {
-  name = "webprofile"
+resource "aws_iam_instance_profile" "main" {
+  name = "instanceprofile"
   role = aws_iam_role.main.name
 }
 
-#create Server
+#create webServer
 resource "aws_instance" "webserver" {
   ami                    = var.ami_webserver
-  iam_instance_profile   = aws_iam_instance_profile.web_profile.name
+  iam_instance_profile   = aws_iam_instance_profile.main.name
   subnet_id              = aws_subnet.public.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.web.id]
+  key_name               = var.key_name
   tags = {
     Name    = "webserver-${var.environment}"
     project = "${var.app}-${var.environment}"
@@ -159,3 +169,23 @@ echo "</body></html>" >> /var/www/html/index.html
 sudo service apache2 reload
 EOF
 }
+
+
+#create bastioinhost
+resource "aws_instance" "bastion" {
+  ami                    = var.ami_bastion
+  iam_instance_profile   = aws_iam_instance_profile.main.name
+  subnet_id              = aws_subnet.public.id
+  instance_type          = var.instance_type
+  vpc_security_group_ids = [aws_security_group.bastion.id]
+  key_name               = var.key_name
+  tags = {
+    Name    = "bastion-${var.environment}"
+    project = "${var.app}-${var.environment}"
+  }
+  user_data = <<EOF
+#/bin/sh
+echo "Test"
+EOF
+}
+

@@ -1,0 +1,21 @@
+- hosts: localhost
+  tags: infrastructuresetup
+  become: false
+  gather_facts: no
+  vars:
+    state: absent
+    app: jumphost-hardening
+    environmentid: test
+    region: eu-central-1
+    instance_type: t2.micro
+    ami_bastion: ami-013fffc873b1eaa1c
+    ami_webserver: ami-013fffc873b1eaa1c
+    cidr_block: 10.0.0.0/16
+    subnet_public_cidr_block: 10.0.1.0/24
+    key_name: bastionkeypair
+    ip_adresses:
+      - 10.0.0.0/32
+      - 172.10.0.0/32
+      - 1.2.3.4/32
+  roles:
+    - infrastructure
