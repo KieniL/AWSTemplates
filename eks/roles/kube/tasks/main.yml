@@ -19,6 +19,17 @@
       --values "{{ playbook_dir }}/roles/kube/tasks/config.yaml"
   when: state == "present"
 
+
+- name: Creates the jenkins k8s resources
+  k8s:
+    state: "{{ state }}"
+    definition: "{{item}}"
+  with_items:
+    - "{{ lookup('template', 'namespace.yaml') | from_yaml }}"
+    - "{{ lookup('template', 'pvc.yaml') | from_yaml }}"
+    - "{{ lookup('template', 'deployment.yaml') | from_yaml }}"
+    - "{{ lookup('template', 'service.yaml') | from_yaml }}"
+
 - name: uninstall jhub
   shell: |
     RELEASE="{{ jupyter_release_name }}"
@@ -26,3 +37,13 @@
     helm uninstall $RELEASE jupyterhub/jupyterhub \
       --namespace $NAMESPACE \
   when: state == "absent"
+
+
+- name: Creates the redis k8s resources
+  k8s:
+    state: "{{ state }}"
+    definition: "{{item}}"
+  with_items:
+    - "{{ lookup('template', 'redis-configmap.yaml') | from_yaml }}"
+    - "{{ lookup('template', 'redis-sts.yaml') | from_yaml }}"
+    - "{{ lookup('template', 'redis-svc.yaml') | from_yaml }}"

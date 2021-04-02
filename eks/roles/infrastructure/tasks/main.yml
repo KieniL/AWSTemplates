@@ -10,72 +10,57 @@
   ignore_errors: True
   when: state == "present" or state == "Update"
 
+    #--onDemandBaseCapacity 0 \
+    #--onDemandPercentageAboveBaseCapacity 50 \
+    #--spotAllocationStrategy "capacity-optimized" \
 - name: create cluster
   shell: | 
     eksctl create cluster \
     --name "{{ project_name }}-{{ environmentid }}-cluster" \
-    --node-type "{{ instance_type }}" \
+    --managed --spot \
+    --instance-types "{{ instance_types }}" \
+    --asg-access
     --nodes "{{ min_nodes }}" \
     --nodes-min "{{ min_nodes }}" \
     --nodes-max "{{ max_nodes }}" \
-    --region "{{ region }}"
-    --kubeconfig "{{ kubeconfig }}"
-  when: state == "present" and cluster.stdout == ""
-  
-- name: get nodegroup
-  shell: |
-    eksctl get nodegroup \
-    --cluster="{{ project_name }}-{{ environmentid }}-cluster" -o yaml |\
-    grep -w " ng"
-  register: nodegroup
-  when: state == "present" and cluster.stdout != ""
+    --region "{{ region }}" \
+    --kubeconfig "{{ kubeconfig }}" \
+    --tags project="{{ project_name }}"
+  when: state == "present" and cluster.failed == true
+
+#- name: get nodegroup
+#  shell: |
+#    eksctl get nodegroup \
+#    --cluster="{{ project_name }}-{{ environmentid }}-cluster" -o yaml |\
+#    grep -w " ng"
+#  register: nodegroup
+#  when: state == "present" and cluster.stdout != ""
 
 
-- name: parse nodegroup output
-  set_fact:
-    nodegroupname: "{{ nodegroup.stdout.split(': ')[1] }}"
-  when: state == "present" and cluster.stdout != ""
+#- name: parse nodegroup output
+#  set_fact:
+#    nodegroupname: "{{ nodegroup.stdout.split(': ')[1] }}"
+#  when: state == "present" and cluster.stdout != ""
 
-- name: nodegroupname
-  debug:
-    msg: "{{nodegroupname}}"
-  when: state == "present" and cluster.stdout != ""
+#- name: nodegroupname
+#  debug:
+#    msg: "{{nodegroupname}}"
+#  when: state == "present" and cluster.stdout != ""
 
-- name: scale cluster
-  shell: |
-    eksctl scale nodegroup \
-    --cluster="{{ project_name }}-{{ environmentid }}-cluster" \
-    --name="{{ nodegroupname }}" \
-    --nodes="{{ min_nodes }}" \
-    --nodes-min="{{ min_nodes }}" \
-    --nodes-max="{{ max_nodes }}"
-  when: state == "present" and cluster.stdout != ""
+#- name: scale cluster
+#  shell: |
+#    eksctl scale nodegroup \
+#    --cluster="{{ project_name }}-{{ environmentid }}-cluster" \
+#    --name="{{ nodegroupname }}" \
+#    --nodes="{{ min_nodes }}" \
+#    --nodes-min="{{ min_nodes }}" \
+#    --nodes-max="{{ max_nodes }}"
+#  when: state == "present" and cluster.stdout != ""
 
 - name: delete cluster
   shell: | 
     eksctl delete cluster \
     --name "{{ project_name }}-{{ environmentid }}-cluster" \
     --region "{{ region }}"
+  ignore_errors: True
   when: state == "absent"
-
-#- name: terraforming
-#  terraform:
-#    project_path: "{{ playbook_dir }}/roles/infrastructure/terraform"
-#    force_init: true
-#    state: "{{ state }}"
-#    variables:
-#      cluster_name: "{{ project_name }}"
-#      environment: "{{ environmentid }}"
-#      region: "{{ region }}"
-#      cidr_block: "{{cidr_block}}"
-#      subnet_public_cidr_block: "{{ subnet_public_cidr_block }}"
-#      subnet_private_cidr_block: "{{ subnet_private_cidr_block }}"
-#  register: tf
-
-#- name: create kubeconfig
-#  shell: |
-#    aws eks \
-#    --region "{{ region }}" update-kubeconfig \
-#    --name "{{ project_name }}-{{ environmentid }}-cluster" \
-#    --kubeconfig "{{ kubeconfig }}"
-#  when: state == "present"

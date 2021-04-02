@@ -7,12 +7,7 @@
     project_name: demo
     environmentid: test
     region: eu-central-1
-    min_nodes: 4
-    max_nodes: 10
-    instance_type: t3a.small
-    #cidr_block: 10.0.0.0/16
-    #subnet_public_cidr_block: 10.0.1.0/24
-    #subnet_private_cidr_block: 10.0.2.0/24
+    instance_types: t3a.small,t3a.medium,t3a.large
     kubeconfig: /home/lukas/.kube/eks.config
   roles:
     - infrastructure
