@@ -4,22 +4,19 @@
 - name: check if cluster already exists
   shell: |
     eksctl get cluster \
-    --name "{{ project_name }}-{{ environmentid }}-cluster" \
+    --name "{{ project_name }}-{{ environmentid }}-{{ region }}-cluster" \
     --region "{{ region }}"
   register: cluster
   ignore_errors: True
   when: state == "present" or state == "Update"
 
-    #--onDemandBaseCapacity 0 \
-    #--onDemandPercentageAboveBaseCapacity 50 \
-    #--spotAllocationStrategy "capacity-optimized" \
 - name: create cluster
   shell: | 
     eksctl create cluster \
-    --name "{{ project_name }}-{{ environmentid }}-cluster" \
+    --name "{{ project_name }}-{{ environmentid }}-{{ region }}-cluster" \
     --managed --spot \
     --instance-types "{{ instance_types }}" \
-    --asg-access
+    --asg-access \
     --nodes "{{ min_nodes }}" \
     --nodes-min "{{ min_nodes }}" \
     --nodes-max "{{ max_nodes }}" \
@@ -28,39 +25,10 @@
     --tags project="{{ project_name }}"
   when: state == "present" and cluster.failed == true
 
-#- name: get nodegroup
-#  shell: |
-#    eksctl get nodegroup \
-#    --cluster="{{ project_name }}-{{ environmentid }}-cluster" -o yaml |\
-#    grep -w " ng"
-#  register: nodegroup
-#  when: state == "present" and cluster.stdout != ""
-
-
-#- name: parse nodegroup output
-#  set_fact:
-#    nodegroupname: "{{ nodegroup.stdout.split(': ')[1] }}"
-#  when: state == "present" and cluster.stdout != ""
-
-#- name: nodegroupname
-#  debug:
-#    msg: "{{nodegroupname}}"
-#  when: state == "present" and cluster.stdout != ""
-
-#- name: scale cluster
-#  shell: |
-#    eksctl scale nodegroup \
-#    --cluster="{{ project_name }}-{{ environmentid }}-cluster" \
-#    --name="{{ nodegroupname }}" \
-#    --nodes="{{ min_nodes }}" \
-#    --nodes-min="{{ min_nodes }}" \
-#    --nodes-max="{{ max_nodes }}"
-#  when: state == "present" and cluster.stdout != ""
-
 - name: delete cluster
   shell: | 
     eksctl delete cluster \
-    --name "{{ project_name }}-{{ environmentid }}-cluster" \
+    --name "{{ project_name }}-{{ environmentid }}-{{ region }}-cluster" \
     --region "{{ region }}"
   ignore_errors: True
   when: state == "absent"

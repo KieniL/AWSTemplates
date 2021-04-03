@@ -1,19 +1,28 @@
 ---
 # tasks file for jupyterhub
+
+- debug:
+    msg: "{{item}}"
+
 - name: Install metricsserver
   k8s:
     state: "{{ state }}"
-    definition: "{{ item }}"
+    kubeconfig: "{{ K8S_AUTH_KUBECONFIG }}"
+    definition: "{{ resources }}"
   with_items: "{{lookup('url', 'https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml', split_lines=False) | from_yaml_all | list}}"
-  when: item is not none
+  when: resources is not none
+  loop_control:
+    loop_var: resources
 
 - name: install jhub
   shell: |
     RELEASE="{{ jupyter_release_name }}"
     NAMESPACE="{{ jupyter_namespace_name }}"
+    KUBECONTEXT="{{ K8S_AUTH_KUBECONFIG }}"
     helm upgrade --cleanup-on-fail \
       --install $RELEASE jupyterhub/jupyterhub \
       --namespace $NAMESPACE \
+      --kubeconfig=$KUBECONTEXT \
       --create-namespace \
       --version="{{ jupyterhub_version }}" \
       --values "{{ playbook_dir }}/roles/kube/tasks/config.yaml"
@@ -23,27 +32,50 @@
 - name: Creates the jenkins k8s resources
   k8s:
     state: "{{ state }}"
-    definition: "{{item}}"
+    kubeconfig: "{{ K8S_AUTH_KUBECONFIG }}"
+    definition: "{{resources}}"
   with_items:
     - "{{ lookup('template', 'namespace.yaml') | from_yaml }}"
     - "{{ lookup('template', 'pvc.yaml') | from_yaml }}"
     - "{{ lookup('template', 'deployment.yaml') | from_yaml }}"
     - "{{ lookup('template', 'service.yaml') | from_yaml }}"
+  loop_control:
+    loop_var: resources
 
 - name: uninstall jhub
   shell: |
     RELEASE="{{ jupyter_release_name }}"
     NAMESPACE="{{ jupyter_namespace_name }}"
+    KUBECONTEXT="{{ K8S_AUTH_KUBECONFIG }}"
     helm uninstall $RELEASE jupyterhub/jupyterhub \
       --namespace $NAMESPACE \
+      --kubeconfig=$KUBECONTEXT
   when: state == "absent"
 
 
 - name: Creates the redis k8s resources
   k8s:
     state: "{{ state }}"
-    definition: "{{item}}"
+    kubeconfig: "{{ K8S_AUTH_KUBECONFIG }}"
+    definition: "{{resources}}"
   with_items:
     - "{{ lookup('template', 'redis-configmap.yaml') | from_yaml }}"
     - "{{ lookup('template', 'redis-sts.yaml') | from_yaml }}"
     - "{{ lookup('template', 'redis-svc.yaml') | from_yaml }}"
+  loop_control:
+    loop_var: resources
+
+
+- name: Install example app
+  k8s:
+    state: "{{ state }}"
+    kubeconfig: "{{ K8S_AUTH_KUBECONFIG }}"
+    definition: "{{resources}}"
+  with_items:
+    - "{{lookup('template', 'guestbook-namespace.yaml') | from_yaml}}"
+    - "{{lookup('template', 'guestbook-deployment.yaml') | from_yaml}}"
+    - "{{lookup('template', 'guestbook-service.yaml') | from_yaml}}"
+    - "{{lookup('template', 'guestbook-frontend-deployment.yaml') | from_yaml}}"
+    - "{{lookup('template', 'guestbook-frontend-service.yaml') | from_yaml}}"
+  loop_control:
+    loop_var: resources

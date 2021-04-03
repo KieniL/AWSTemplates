@@ -2,12 +2,19 @@
   tags: infrastructuresetup
   become: false
   gather_facts: no
-  vars:
-    state: absent
-    project_name: demo
-    environmentid: test
-    region: eu-central-1
-    instance_types: t3a.small,t3a.medium,t3a.large
-    kubeconfig: /home/lukas/.kube/eks.config
-  roles:
-    - infrastructure
+  tasks:
+  - name: infrastructureProvisioning
+    vars:
+      state: absent
+      project_name: demo
+      environmentid: test
+      region: "{{ item }}"
+      min_nodes: 1
+      max_nodes: 10
+      instance_types: t3a.small,t3a.medium
+      kubeconfig: "/home/lukas/.kube/eks-{{ item }}.config"
+    include_role:
+      name: infrastructure
+    with_items:
+      - eu-central-1
+      - eu-west-1
