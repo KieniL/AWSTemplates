@@ -26,6 +26,18 @@ resource "aws_subnet" "public" {
   }
 }
 
+resource "aws_subnet" "private" {
+  vpc_id                   = aws_vpc.main.id
+  cidr_block               = var.subnet_private_cidr_block
+  availability_zone        = "${var.region}b"
+  depends_on = [ aws_vpc.main ]
+
+  tags = {
+    project     = "${var.app}-${var.environment}"
+    "state"  = "private"
+  }
+}
+
 
 resource "aws_internet_gateway" "gw" {
   vpc_id     = aws_vpc.main.id
@@ -63,6 +75,50 @@ resource "aws_route_table_association" "public" {
   ]
 }
 
+resource "aws_eip" "nat" {
+  vpc              = true
+  public_ipv4_pool = "amazon"
+
+  tags = {
+    Name = "eipp-${var.environment}"
+    project     = "${var.app}-${var.environment}"
+  }
+}
+
+resource "aws_nat_gateway" "gw" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public.id
+  depends_on    = [aws_internet_gateway.gw]
+
+  tags = {
+    Name = "nat_Gateway-${var.environment}"
+    project     = "${var.app}-${var.environment}"
+  }
+}
+
+
+resource "aws_route_table" "nat-route" {
+  vpc_id = aws_vpc.main.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.gw.id
+  }
+  depends_on = [ aws_vpc.main ]
+  tags  = {
+      Name = "nat_route_table-${var.environment}"
+      state = "public"
+      project     = "${var.app}-${var.environment}"
+  } 
+}
+
+resource "aws_route_table_association" "private" {
+  subnet_id      = aws_subnet.private.id
+  route_table_id = aws_route_table.nat-route.id
+  depends_on = [ aws_route_table.nat-route ,
+                 aws_subnet.private
+  ]
+}
+
 
 # Create the PublicSecurityGroup
 resource "aws_security_group" "bastion" {
@@ -79,6 +135,13 @@ resource "aws_security_group" "bastion" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = var.ip_adresses
+  }
+
+  egress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -108,9 +171,27 @@ resource "aws_security_group" "web" {
     from_port = 22
     to_port   = 22
     protocol  = "tcp"
-    cidr_blocks = [
-      "${aws_instance.bastion.private_ip}/32"
+    security_groups = [
+      aws_security_group.bastion.id
     ]
+  }
+  egress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 22
+    to_port   = 22
+    protocol  = "tcp"
     security_groups = [
       aws_security_group.bastion.id
     ]
@@ -152,7 +233,7 @@ resource "aws_iam_instance_profile" "main" {
 resource "aws_instance" "webserver" {
   ami                    = var.ami_webserver
   iam_instance_profile   = aws_iam_instance_profile.main.name
-  subnet_id              = aws_subnet.public.id
+  subnet_id              = aws_subnet.private.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.web.id]
   key_name               = var.key_name

@@ -13,6 +13,11 @@ variable "subnet_public_cidr_block" {
   description = "The cidr_block to set in public subnet- Replaced by Ansible Playbook on run"
 }
 
+variable "subnet_private_cidr_block" {
+  type        = string
+  description = "The cidr_block to set in private subnet- Replaced by Ansible Playbook on run"
+}
+
 variable "ip_adresses" {
   type        = list(string)
   description = "The ip addresses allowed for ssh access- Replaced by Ansible Playbook on run"

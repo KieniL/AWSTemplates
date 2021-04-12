@@ -4,3 +4,4 @@ An example app with a bastion in a public subnet and a webserver also in public 
 
 The bastion is secured by multiple things:
 1. allowing ssh access only to a defined list of ip adresses
+2. Only allow ssh to secure hosts from the jumphost
