@@ -1,0 +1,19 @@
+---
+# tasks file for infrastructure
+- name: terraforming
+  terraform:
+    project_path: "{{ playbook_dir }}/roles/infrastructure/terraform"
+    force_init: true
+    state: "{{ state }}"
+    variables:
+      app: "{{ app }}"
+      environment: "{{ environmentid }}"
+      region: "{{ region }}"
+      cidr_block: "{{cidr_block}}"
+      instance_type: "{{ instance_type }}"
+      ami_bastion: "{{ ami_bastion }}"
+      ami_webserver: "{{ ami_webserver }}"
+      subnet_public_cidr_block: "{{ subnet_public_cidr_block }}"
+      ip_adresses: "{{ ip_adresses | list | to_json }}"
+      key_name: "{{ key_name }}"
+  register: tf
