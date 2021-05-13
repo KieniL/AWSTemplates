@@ -182,8 +182,8 @@ resource "aws_security_group" "web" {
   }
 
   ingress {
-    from_port = 22
-    to_port   = 22
+    from_port = "${var.ssh_port}"
+    to_port   = "${var.ssh_port}"
     protocol  = "tcp"
     security_groups = [
       aws_security_group.bastion.id
@@ -204,8 +204,8 @@ resource "aws_security_group" "web" {
   }
 
   egress {
-    from_port = 22
-    to_port   = 22
+    from_port = "${var.ssh_port}"
+    to_port   = "${var.ssh_port}"
     protocol  = "tcp"
     security_groups = [
       aws_security_group.bastion.id
@@ -257,11 +257,11 @@ resource "aws_instance" "webserver" {
     project = "${var.app}-${var.environment}"
   }
   user_data = <<EOF
-#/bin/sh
+#!/bin/bash
 sudo apt-get update && sudo apt-get install -y apache2
 sudo service apache2 start
-echo "<html><body><h1>Awesome !!!</h1>" > /var/www/html/index.html
-echo "</body></html>" >> /var/www/html/index.html
+echo "<html><body><h1>Awesome !!!</h1>" > sudo /var/www/html/index.html
+echo "</body></html>" >> sudo /var/www/html/index.html
 sudo service apache2 reload
 EOF
 }
@@ -280,8 +280,9 @@ resource "aws_instance" "bastion" {
     project = "${var.app}-${var.environment}"
   }
   user_data = <<EOF
-#/bin/sh
-echo "Test"
+#!/bin/bash
+sudo sed -i "s/#Port 22/Port ${var.ssh_port}/g" /etc/ssh/sshd_config
+sudo service sshd restart
 EOF
 }
 
