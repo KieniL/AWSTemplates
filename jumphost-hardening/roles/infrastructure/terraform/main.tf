@@ -134,7 +134,7 @@ resource "aws_security_group" "bastion" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = var.ip_adresses
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
@@ -148,7 +148,7 @@ resource "aws_security_group" "bastion" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = var.ip_adresses
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {

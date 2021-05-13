@@ -15,7 +15,7 @@
     subnet_private_cidr_block: 10.0.1.0/24
     key_name: bastionkeypair
     ip_adresses:
-      - 84.114.17.129/32
+      - 10.0.0.10/32
       - 172.10.0.0/32
       - 1.2.3.4/32
     ssh_port: 234
