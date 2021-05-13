@@ -1,0 +1,8 @@
+- hosts: localhost
+  tags: infrastructuresetup
+  become: false
+  gather_facts: no
+  vars:
+    state: absent
+  roles:
+    - billing-alarm

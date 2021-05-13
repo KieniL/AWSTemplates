@@ -3,7 +3,7 @@
   become: false
   gather_facts: no
   vars:
-    state: present
+    state: absent
     app: jumphost-hardening
     environmentid: test
     region: eu-central-1
