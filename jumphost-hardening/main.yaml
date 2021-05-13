@@ -18,7 +18,7 @@
       - 84.114.17.129/32
       - 172.10.0.0/32
       - 1.2.3.4/32
-    ssh_port: 222
+    ssh_port: 234
     ssh_config_name: jumphost_config
   roles:
     - infrastructure

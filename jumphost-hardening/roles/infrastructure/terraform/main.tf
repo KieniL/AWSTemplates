@@ -157,6 +157,19 @@ resource "aws_security_group" "bastion" {
     protocol  = "tcp"
     cidr_blocks = var.ip_adresses
   }
+
+  egress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 # Create the WebserverSecurityGroup
@@ -182,8 +195,8 @@ resource "aws_security_group" "web" {
   }
 
   ingress {
-    from_port = "${var.ssh_port}"
-    to_port   = "${var.ssh_port}"
+    from_port = 22
+    to_port   = 22
     protocol  = "tcp"
     security_groups = [
       aws_security_group.bastion.id
@@ -204,8 +217,8 @@ resource "aws_security_group" "web" {
   }
 
   egress {
-    from_port = "${var.ssh_port}"
-    to_port   = "${var.ssh_port}"
+    from_port = 22
+    to_port   = 22
     protocol  = "tcp"
     security_groups = [
       aws_security_group.bastion.id
@@ -281,8 +294,21 @@ resource "aws_instance" "bastion" {
   }
   user_data = <<EOF
 #!/bin/bash
+#change ssh port
 sudo sed -i "s/#Port 22/Port ${var.ssh_port}/g" /etc/ssh/sshd_config
 sudo service sshd restart
+# install dependencies
+sudo yum update -y && sudo yum install -y git gcc gcc-c++
+# download endlessh
+sudo git clone https://github.com/skeeto/endlessh /home/ec2-user/endlessh
+cd /home/ec2-user/endlessh && make
+#configure endlessh
+sudo mv endlessh /usr/local/bin/
+sudo cp util/endlessh.service /etc/systemd/system/
+sudo systemctl enable endlessh
+sudo mkdir -p /etc/endlessh
+sudo sh -c  "echo 'Port 22' > /etc/endlessh/config"
+sudo systemctl start endlessh
 EOF
 }
 
