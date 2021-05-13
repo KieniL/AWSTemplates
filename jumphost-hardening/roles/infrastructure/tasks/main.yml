@@ -17,4 +17,7 @@
       subnet_private_cidr_block: "{{ subnet_private_cidr_block }}"
       ip_adresses: "{{ ip_adresses | list | to_json }}"
       key_name: "{{ key_name }}"
+      ssh_port: "{{ ssh_port }}"
+      ssh_config_path: "{{ playbook_dir }}"
+      ssh_config_name: "{{ssh_config_name}}"
   register: tf

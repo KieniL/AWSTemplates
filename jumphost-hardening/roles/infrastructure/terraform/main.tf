@@ -137,15 +137,29 @@ resource "aws_security_group" "bastion" {
     cidr_blocks = var.ip_adresses
   }
 
+  ingress {
+    from_port = "${var.ssh_port}"
+    to_port   = "${var.ssh_port}"
+    protocol  = "tcp"
+    cidr_blocks = var.ip_adresses
+  }
+
   egress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = var.ip_adresses
+  }
+
+  egress {
+    from_port = "${var.ssh_port}"
+    to_port   = "${var.ssh_port}"
+    protocol  = "tcp"
+    cidr_blocks = var.ip_adresses
   }
 }
 
-# Create the PublicSecurityGroup
+# Create the WebserverSecurityGroup
 resource "aws_security_group" "web" {
   name        = "WebServerSecurityGroup"
   description = "Allow http connection from client"
@@ -175,6 +189,7 @@ resource "aws_security_group" "web" {
       aws_security_group.bastion.id
     ]
   }
+
   egress {
     from_port   = 80
     to_port     = 80

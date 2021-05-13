@@ -51,3 +51,18 @@ variable "key_name" {
   type        = string
   description = "the name of the keypair for ssh"
 }
+
+variable "ssh_port" {
+  type        = number
+  description = "the port for ssh"
+}
+
+variable "ssh_config_path" {
+  type        = string
+  description = "the directory to store the ssh_config"
+}
+
+variable "ssh_config_name" {
+  type        = string
+  description = "the name for the ssh_config"
+}

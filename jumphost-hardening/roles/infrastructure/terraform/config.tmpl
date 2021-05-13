@@ -1,0 +1,10 @@
+Host jumphost
+   HostName ${jumphost_dns}
+   User ec2-user
+   IdentityFile /home/lukas/Desktop/DevOps/AWSTemplates/jumphost-hardening/bastionkeypair.pem
+   ProxyCommand none
+Host securehost
+   HostName ${securehost_ip}
+   User ubuntu
+   IdentityFile /home/lukas/Desktop/DevOps/AWSTemplates/jumphost-hardening/bastionkeypair.pem
+   ProxyCommand ssh jumphost -W %h:%p
