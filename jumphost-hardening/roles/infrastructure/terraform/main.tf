@@ -294,14 +294,19 @@ resource "aws_instance" "bastion" {
   }
   user_data = <<EOF
 #!/bin/bash
+
 #change ssh port
 sudo sed -i "s/#Port 22/Port ${var.ssh_port}/g" /etc/ssh/sshd_config
 sudo service sshd restart
+
 # install dependencies
-sudo yum update -y && sudo yum install -y git gcc gcc-c++
+sudo yum update -y && sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+sudo yum update -y && sudo yum install -y git gcc gcc-c++ google-authenticator
+
 # download endlessh
 sudo git clone https://github.com/skeeto/endlessh /home/ec2-user/endlessh
 cd /home/ec2-user/endlessh && make
+
 #configure endlessh
 sudo mv endlessh /usr/local/bin/
 sudo cp util/endlessh.service /etc/systemd/system/
