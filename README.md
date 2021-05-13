@@ -12,4 +12,4 @@ Storing of AWS Cloudformation Templates with Diagramms for different purposes
 * s3-angular (See Readme in the folder for more information)
 * ApplicationForm (https://bitbucket.org/lukien/workspace/projects/) Contains a react frontend hosted on s3, a lambda function to process the form and then storing in dynamodb
 * eks (provision an eks cluster in multiple regions and then deploys an example jupyterhub, jenkins and redis)
-* Jumphost-hardening (a setup for a jumphost --> Work in Progress)
+* Jumphost-hardening (a setup for a jumphost, changes ssh port, runs endlessh on default port, adds google-authenticator)

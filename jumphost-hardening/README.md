@@ -27,8 +27,6 @@ Configure the ssh file with these two commands:<br/>
 <code>sudo sed -i "s/#ChallengeResponseAuthentication yes/ChallengeResponseAuthentication yes/g" /etc/ssh/sshd_config</code><br/>
 <code>sudo sed -i "s/ChallengeResponseAuthentication no/#ChallengeResponseAuthentication no/g" /etc/ssh/sshd_config</code><br/>
 
-Then you can restart the sshd service:
-<code>sudo systemctl restart sshd.service</code>
 
 Making ssh aware of mfa with:
 <code>sudo sh -c  "echo 'AuthenticationMethods publickey,password publickey,keyboard-interactive' >> /etc/ssh/sshd_config"</code><br/>
@@ -37,5 +35,7 @@ Configure pam to use verification:
 
 <code>sudo sed -i "s/auth.*substack.*password-auth/#auth substack password-auth/g" /etc/pam.d/sshd</code>
 
+Then you can restart the sshd service:
+<code>sudo systemctl restart sshd.service</code>
 
 Also see https://www.digitalocean.com/community/tutorials/how-to-set-up-multi-factor-authentication-for-ssh-on-centos-7

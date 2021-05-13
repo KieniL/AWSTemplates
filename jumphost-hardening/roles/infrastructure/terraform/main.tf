@@ -80,7 +80,7 @@ resource "aws_eip" "nat" {
   public_ipv4_pool = "amazon"
 
   tags = {
-    Name = "eipp-${var.environment}"
+    Name = "eipp-${var.app}-${var.environment}"
     project     = "${var.app}-${var.environment}"
   }
 }
@@ -316,4 +316,6 @@ sudo sh -c  "echo 'Port 22' > /etc/endlessh/config"
 sudo systemctl start endlessh
 EOF
 }
+
+
 
